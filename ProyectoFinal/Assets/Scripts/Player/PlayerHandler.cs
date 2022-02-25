@@ -2,48 +2,81 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
 public class PlayerHandler : MonoBehaviour
 {
-    [SerializeField] float movementSpeed;
+    [SerializeField] private float movementSpeed;
+    [SerializeField] private float jumpHeight = 2f;
     private float camAxisX = 0f;
     private float camAxisY = 0f;
     private Quaternion camRotation;
-    [SerializeField] bool invertYAxis = true;
-    [SerializeField] float sensMultiplier = 3f;
-    [SerializeField] float runningMultiplier = 1f;
+    [SerializeField] private bool invertYAxis = true;
+    [SerializeField] private float sensMultiplier = 3f;
+    [SerializeField] private float runningMultiplier = 1f;
     [SerializeField] private GameObject camPivot;
+    [SerializeField] private CharacterController ccPlayer;
+    [SerializeField] private float gravity = -9.81f;
+    [SerializeField] private Transform groundCheck;
+    [SerializeField] private float groundDistance = 0.3f;
+    [SerializeField] private LayerMask groundMask;
+    [SerializeField] private float stepOffset = 0.5f;
+    private bool isGrounded;
 
+    private Vector3 velocity;
+
+    private void Start()
+    {
+
+    }
     private void Update()
     {
-        FixedMovement(movementSpeed);
+        Movement(movementSpeed);
 
         MRotation();
+
+        Gravity();
     }
 
-    private void Movement () // *1 Este es el metodo de movimiento usando fuerzas
+    private void Movement(float Speed = 1f, float rMult = 1f, float rSMult = 1f)
     {
-        
-    }
-    private void FixedMovement(float Speed = 1f, float rMult = 1f, float rSMult = 1f) // *1 Estes es el metodo de movimiento sin usar fuerzas
-    {
-        if (Input.GetKey(KeyCode.LeftShift)) 
+        if (Input.GetKey(KeyCode.LeftShift))
         {
             rMult = runningMultiplier;
-            rSMult = runningMultiplier * 0.7f;
+            rSMult = runningMultiplier * 0.3f;
         }
 
         if (Input.GetKey(KeyCode.W))
-            transform.Translate(Speed * Time.deltaTime * Vector3.forward * rMult);
+            ccPlayer.Move(Speed * Time.deltaTime * transform.forward * rMult);
 
         if (Input.GetKey(KeyCode.S))
-            transform.Translate(Speed * Time.deltaTime * Vector3.back);
+            ccPlayer.Move(Speed * Time.deltaTime * (transform.forward * -1));
 
         if (Input.GetKey(KeyCode.A))
-            transform.Translate(Speed * Time.deltaTime * Vector3.left * rSMult);
+            ccPlayer.Move(Speed * Time.deltaTime * (transform.right * -1) * rSMult);
 
         if (Input.GetKey(KeyCode.D))
-            transform.Translate(Speed * Time.deltaTime * Vector3.right * rSMult);
+            ccPlayer.Move(Speed * Time.deltaTime * transform.right * rSMult);
+
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        {
+            velocity.y = Mathf.Sqrt(jumpHeight * -2 * gravity);
+        }
+    }
+    private void Gravity()
+    {
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+
+        if (isGrounded && velocity.y < 0f)
+        {
+            velocity.y = -2f;
+            ccPlayer.stepOffset = stepOffset;
+        }
+        else 
+        {
+            ccPlayer.stepOffset = 0f;
+        }
+
+        velocity.y += gravity * Time.deltaTime;
+        ccPlayer.Move(velocity * Time.deltaTime);
     }
     private void MRotation()
     {
