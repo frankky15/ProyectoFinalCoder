@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 7
   despawnTime: 6
+  sasda: {fileID: 0}
 --- !u!1 &4937699239027983541
 GameObject:
   m_ObjectHideFlags: 0

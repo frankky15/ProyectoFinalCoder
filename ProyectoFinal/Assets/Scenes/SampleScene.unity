@@ -662,22 +662,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec6efb6bd5375df41886d24edd4e9202, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sSwordPrimaryDamage: 50
-  sSwordPrimaryRate: 1
-  sSwordSecondaryDamage: 20
-  sSwordSecondaryRate: 1
-  sSwordSecondarySpread: 1
+  weaponsSO: {fileID: 11400000, guid: 72796863c1a5b05438db849d34dfdc9c, type: 2}
   staffGameobject: {fileID: 0}
   staffPrimaryProjectile: {fileID: 1782435093766045894, guid: 2cd23f20617661f46946fd279d992015, type: 3}
   staffGunpoint: {fileID: 1782435095212656118}
-  staffShootPoint: {fileID: 9097399985198478403}
-  staffPrimaryDamage: 40
-  staffPrimaryRate: 1
-  staffPrimaryDamMult: 0.1
-  staffPrimaryChargeTime: 1
-  staffPrimaryMaxSize: 3
-  staffSecondaryDamage: 5
-  staffSecondaryRate: 0.2
 --- !u!1 &1524336535
 GameObject:
   m_ObjectHideFlags: 0
