@@ -41,7 +41,7 @@ public class PlayerHandler : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftShift))
         {
             rMult = runningMultiplier;
-            rSMult = runningMultiplier * 0.3f;
+            rSMult = runningMultiplier * 1.1f;
         }
         // if (!isGrounded) // * queria que cuando salte mantenga momentum, pero queda medio mal y roba un poco el control...
         // {

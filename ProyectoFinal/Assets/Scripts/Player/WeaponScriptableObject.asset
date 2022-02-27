@@ -15,12 +15,14 @@ MonoBehaviour:
   sSwordPrimaryDamage: 50
   sSwordPrimaryRate: 1
   sSwordSecondaryDamage: 20
+  sSwordSecondaryPelletAmm: 6
   sSwordSecondaryRate: 1
-  sSwordSecondarySpread: 1
-  staffPrimaryDamage: 40
+  sSwordSecondarySpread: 40
+  staffPrimaryDamage: 5
   staffPrimaryRate: 1
   staffPrimaryDamMult: 4
   staffPrimaryChargeTime: 1
   staffPrimaryMaxSize: 5
   staffSecondaryDamage: 5
   staffSecondaryRate: 0.2
+  staffSecondaryFlashTime: 0.1

@@ -8,8 +8,9 @@ public class WeaponScriptableObject : ScriptableObject
     public float sSwordPrimaryDamage = 50f;
     public float sSwordPrimaryRate = 1f;
     public float sSwordSecondaryDamage = 20f;
+    public float sSwordSecondaryPelletAmm = 6f;
     public float sSwordSecondaryRate = 1f;
-    public float sSwordSecondarySpread = 1f;
+    public float sSwordSecondarySpread = 50f;
 
     // * Staff variables * //
     public float staffPrimaryDamage = 40f;
@@ -19,4 +20,5 @@ public class WeaponScriptableObject : ScriptableObject
     public float staffPrimaryMaxSize = 5f;
     public float staffSecondaryDamage = 5f;
     public float staffSecondaryRate = 0.2f;
+    public float staffSecondaryFlashTime = 0.1f;
     }
