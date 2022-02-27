@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9097399986704658803}
   - component: {fileID: 223280127379761160}
+  - component: {fileID: 434648090275486911}
   m_Layer: 0
   m_Name: Staff Primary Projectile
   m_TagString: Untagged
@@ -47,7 +48,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 7
   despawnTime: 6
-  sasda: {fileID: 0}
+--- !u!135 &434648090275486911
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1782435093766045894}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.15
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4937699239027983541
 GameObject:
   m_ObjectHideFlags: 0
@@ -152,7 +165,6 @@ GameObject:
   - component: {fileID: 1475456246340845047}
   - component: {fileID: 376138828462904508}
   - component: {fileID: 5952921707932508193}
-  - component: {fileID: 2772737688536508667}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -223,16 +235,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &2772737688536508667
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5001391322190778924}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}

@@ -5,6 +5,8 @@ using UnityEngine;
 public class WeaponController : MonoBehaviour
 {
     [SerializeField] private WeaponScriptableObject weaponsSO;
+    [SerializeField] private LayerMask aimColliderMask = new LayerMask();
+    [SerializeField] private Transform hitscanTransform;
 
     // * Staff variables * //
     [SerializeField] private GameObject staffGameobject;
@@ -16,21 +18,32 @@ public class WeaponController : MonoBehaviour
     private bool isUsingStaff;
     private bool isUsingSSword;
 
+
     private void Start()
     {
         isUsingStaff = true;
         isUsingSSword = false;
-
-        _staffPrimaryDamage =  weaponsSO.staffPrimaryDamage;
-
+        _staffPrimaryDamage = weaponsSO.staffPrimaryDamage;
     }
     private void Update()
     {
         WeaponSwitch();
         ShotgunSword();
         Staff();
+        HitscanRaycast();
     }
 
+    private void HitscanRaycast()
+    {
+        Vector2 screenCenter = new Vector2(Screen.width / 2f, Screen.height / 2f);
+
+        Ray ray = Camera.main.ScreenPointToRay(screenCenter);
+
+        if (Physics.Raycast(ray, out RaycastHit raycastHit, 999f, aimColliderMask))
+        {
+            hitscanTransform.position = raycastHit.point;
+        }
+    }
     private void WeaponSwitch()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -87,7 +100,8 @@ public class WeaponController : MonoBehaviour
         {
             // Debug.Log("Shooting StaffPrimary");
 
-            GameObject projectile = Instantiate(staffPrimaryProjectile, staffGunpoint.transform.position, staffGunpoint.transform.rotation);
+            Vector3 aimDir = (hitscanTransform.position - staffGunpoint.transform.position).normalized;
+            GameObject projectile = Instantiate(staffPrimaryProjectile, staffGunpoint.transform.position, Quaternion.LookRotation(aimDir, Vector3.up));
             projectile.transform.localScale = staffGunpoint.transform.localScale;
             staffPrimarySize = 1f;
             _staffPrimaryDamage = weaponsSO.staffPrimaryDamage;

@@ -60,7 +60,7 @@ public class Enemy : MonoBehaviour
     }
 
     void Follow(){ //Despues agregar un raycast para que la IA esquive las paredes
-        Debug.Log(Vector3.Distance(transform.position,player.transform.position));
+        // Debug.Log(Vector3.Distance(transform.position,player.transform.position));
         if(isMoving){//Si me estoy moviendo:
             transform.position = Vector3.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime); //Sigo al objetivo
             Quaternion newRotation = Quaternion.LookRotation(player.transform.position - transform.position);//Creo una rotacion segun la posicion entre el jugador
