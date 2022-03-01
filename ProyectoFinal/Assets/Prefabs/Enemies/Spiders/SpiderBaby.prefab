@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3898978547677877247
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1411290707695535237}
+  m_Layer: 0
+  m_Name: ModelPartsContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1411290707695535237
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3898978547677877247}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1317330212276236650}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &3552558775440511740
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -57,7 +87,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2523460255255297974, guid: 47798f58def42354f87e7546cc445ba7, type: 3}
       propertyPath: m_Name
-      value: Spider_Fuga_Baby Variant
+      value: SpiderBaby
+      objectReference: {fileID: 0}
+    - target: {fileID: 2523460255255297974, guid: 47798f58def42354f87e7546cc445ba7, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 4072529262452721540, guid: 47798f58def42354f87e7546cc445ba7, type: 3}
       propertyPath: m_IsActive
@@ -78,6 +112,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2523460255255297974, guid: 47798f58def42354f87e7546cc445ba7, type: 3}
   m_PrefabInstance: {fileID: 3552558775440511740}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1317330212276236650 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2523460255254930326, guid: 47798f58def42354f87e7546cc445ba7, type: 3}
+  m_PrefabInstance: {fileID: 3552558775440511740}
+  m_PrefabAsset: {fileID: 0}
 --- !u!54 &460331630
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -92,10 +131,10 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
---- !u!65 &460331631
-BoxCollider:
+--- !u!136 &3243430075621028534
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -104,9 +143,10 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.24003124, y: 0.79073215, z: 1.1106882}
-  m_Center: {x: -0.0021357536, y: 0.4032023, z: 0.11222696}
+  m_Radius: 0.46688104
+  m_Height: 0.9337621
+  m_Direction: 1
+  m_Center: {x: -0.038092136, y: 0.39721775, z: 0.023166895}
 --- !u!114 &460331629
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -119,12 +159,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4c0f2a5b864d8f4896255b1e1147bfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  heal: 10
   speed: 5
+  runSpeed: 7
   keepDistance: 2
   waitAttack: 1
+  waitTimeDead: 2
   hearRange: 10
   hearRunRange: 20
   followRange: 100
   moveWithWayPoints: 1
-  wayPoints:
-  - {fileID: 0}
+  wayPoints: []

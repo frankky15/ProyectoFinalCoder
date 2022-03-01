@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5525843014205037744}
   - component: {fileID: 252531731330259472}
   m_Layer: 0
-  m_Name: Spider_Fuga_Baby_Root
+  m_Name: Animator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

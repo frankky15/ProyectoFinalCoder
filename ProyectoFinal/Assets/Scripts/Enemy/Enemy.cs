@@ -5,9 +5,13 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]//Cualquier gameObject que se le ponga este script va a tener el componente Rigidbody
 public class Enemy : MonoBehaviour
 {
+    [SerializeField] public int heal = 10; //Variable de salud
     [SerializeField] private float speed = 5f; //Variable de velocidad
+    [SerializeField] private float runSpeed = 7f; //Variable de velocidad al correr
     [SerializeField] private float keepDistance = 2f; //Variable para no pegarse al jugador
     [SerializeField] private float waitAttack = 1f;//Cada cuanto van a ser los ataques del enemigo
+    [SerializeField] private float waitTimeDead = 2f; //Variable para saber en cuanto se termina la animacion de muerte
+
 
     [SerializeField] private float hearRange = 20f; //Rango para escuchar al jugador cuando este cerca
     [SerializeField] private float hearRunRange = 30f; //Rango mas grande para escuchar al jugador correr
@@ -18,6 +22,8 @@ public class Enemy : MonoBehaviour
 
 
     private int nextWayPoint = 0;//Waypoint al que el enemigo se esta moviendo
+    
+    private float timerDead = 0; //Timer para saber cuanto dura la animacion de muerte
 
     private float timerAttack;//Timer para el waitAttack
     private bool isFollowing;//Variable para saber si se esta siguiendo al jugador
@@ -27,7 +33,7 @@ public class Enemy : MonoBehaviour
     private GameObject player;//El jugador
     private GameObject hitBoxAttack; //Collider que simula el ataque
     
-    private AnimationsController animator;
+    private AnimationsController animator; //Script que activa las animaciones
 
     [SerializeField] private List<Transform> wayPoints; //Lista de waypoints solo se necesita el container hijo para poder poner los waypoints
 
@@ -35,9 +41,9 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        hitBoxAttack = transform.GetChild(0).gameObject;
-        hitBoxAttack.SetActive(false);
-        animator = GetComponent<AnimationsController>();
+        hitBoxAttack = transform.GetChild(0).gameObject; //Obtengo la hitbox de ataque
+        hitBoxAttack.SetActive(false); //Desactivo la hitbox de ataque
+        animator = GetComponent<AnimationsController>(); //Obtengo las animaciones
         if(moveWithWayPoints){//Si se marco la opcion de mover con wayPoints:
             wayPointsSettings();//configuro los waypoints
             nextWayPoint = 0;//Inicializo el primer waypoint
@@ -46,6 +52,12 @@ public class Enemy : MonoBehaviour
         player = GameObject.Find("Player");//Asigno el jugador a su variable
         if(hearRange > hearRunRange){//Si hearRange es mayor a hearRunRange
             Debug.LogError("hearRange no debe ser menor a hearRunRange");//Mostrar cartel de error
+        }
+        if(runSpeed < speed){  //Si la velocidad al correr es menor a la velocidad:
+            Debug.LogError("la velocidad al correr debe ser mayor o igual a la velocidad normal"); //Mostrar Error
+        }
+        if(followRange < hearRange || followRange < hearRunRange){ //Si el rango a perseguir, es menor al de escuchar, o menor al de escuchar correr:
+            Debug.LogError("El rango para perseguir debe ser mayor a los rangos para escuchar");//Mostrar Error
         }
         
     }
@@ -60,6 +72,7 @@ public class Enemy : MonoBehaviour
         Follow();//Funcion para seguir al jugador
         
         Attack(); //Funcion para atacar
+        Death();//Funcion para animar la muerte, y eliminar el gameObject
     }
 
     void wayPointsSettings(){//Funcion para facilitar la creacion de los waypoints
@@ -88,6 +101,11 @@ public class Enemy : MonoBehaviour
             }
             else{//Sino
                 moveWithWayPoints = false; //No me muevo con wayPoints
+            }
+        }
+        else{
+            if(wayPoints.Count <= 0){
+                moveWithWayPoints = false;
             }
         }
         
@@ -133,7 +151,7 @@ public class Enemy : MonoBehaviour
         //Debug.Log(Vector3.Distance(transform.position,player.transform.position));
         if(isFollowing){//Si me estoy moviendo:
             moveWithWayPoints = false;//Dejo de moverme con wayPoints
-            transform.position = Vector3.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime); //Sigo al objetivo
+            transform.position = Vector3.MoveTowards(transform.position, player.transform.position, runSpeed * Time.deltaTime); //Sigo al objetivo
             Quaternion newRotation = Quaternion.LookRotation(player.transform.position - transform.position);//Creo una rotacion segun la posicion entre el jugador
 
             transform.rotation = newRotation;//le asigno la nueva rotacion a mi rotacion
@@ -154,23 +172,33 @@ public class Enemy : MonoBehaviour
     }
       
     void Attack(){
-        if(Vector3.Distance(transform.position,player.transform.position) <= keepDistance){//Si la distancia entre el jugador y el enemigo es menor o igual a keepDistance:
-            canAttack = true;//Puedo Atacar
-            animator.Attack(); //Llamo a la funcion de animacion de ataque en el script de animacion de ataque
-            hitBoxAttack.SetActive(true);
-            isFollowing = false;//Dejo de moverme
-        }
-        if(canAttack && !isFollowing){//Si puedo atacar y no me estoy moviendo:
+        timerAttack += Time.deltaTime;//El timer va a ser igual al tiempo
+        if(canAttack){
             animator._animateWhenRun = false; //Cancelo la animacion de correr de la araña
-            timerAttack += Time.deltaTime;//El timer va a ser igual al tiempo
+            animator.Attack(); //Llamo a la funcion de animacion de ataque en el script de animacion
+            hitBoxAttack.SetActive(true);
             if(timerAttack >= waitAttack){//si el timer llega a su wait:
                 hitBoxAttack.SetActive(false);
                 canAttack = false;//ya no se puede atacar
-                animator._animateWhenRun = true;
+                isFollowing = true; //Sigo al jugador
+                animator._animateWhenRun = true; //Reactivo la animacion al correr
                 timerAttack = 0;//Reinicio el timer
             }
         }
     }
+    void Death(){
+        if(heal <= 0){ //Si la vida es menor o igual a 0:
+            moveWithWayPoints = false; //No me muevo
+            isFollowing = false; //No persigo
+            canAttack = false; //No puedo atacar
+            animator.SetDead(); //Activo la animacion de tiempo
+            timerDead += Time.deltaTime; //Activo el timer de muerte
+            if(timerDead >= waitTimeDead){ //Si el timer llega a waitTimeDead:
+                Destroy(transform.gameObject); //Me elimino de la escena
+            }
+        }
+    }
+
     private void OnTriggerEnter(Collider other){
         if(other.CompareTag("WayPoint")){//Si entro a un waypoint:
             nextWayPoint++;//Cambio al siguiente waypoint
