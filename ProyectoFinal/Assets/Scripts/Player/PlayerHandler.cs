@@ -19,6 +19,7 @@ public class PlayerHandler : MonoBehaviour
     [SerializeField] private float groundDistance = 0.3f;
     [SerializeField] private LayerMask groundMask;
     [SerializeField] private float stepOffset = 0.5f;
+    [SerializeField] private WeaponScriptableObject weaponStatus;
     private bool isGrounded;
 
     private Vector3 velocity;
@@ -29,6 +30,7 @@ public class PlayerHandler : MonoBehaviour
     }
     private void Update()
     {
+        weaponStatus.playerIsGrounded = isGrounded;
         Movement(movementSpeed);
 
         MRotation();

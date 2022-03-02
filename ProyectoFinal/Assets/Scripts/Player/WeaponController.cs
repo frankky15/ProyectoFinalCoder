@@ -23,13 +23,15 @@ public class WeaponController : MonoBehaviour
 
     // * Shotgun Sword variables * //
     [SerializeField] private GameObject sSwordGameobject;
-    [SerializeField] private Transform sSwordGunpoint;
     [SerializeField] private GameObject sSwordSecondaryBulletHole;
     [SerializeField] private GameObject sSwordSecondaryMuzzleFlash;
     private Vector3 sSwordInitPos;
     private float sSwordSecondaryCooldown;
     private float sSwordSecondaryMuzzleflashCooldown;
     private bool sSwordSecondaryMuzzleFlashBool;
+
+    [SerializeField] private Transform cameraCenter;
+    private RaycastHit hitscanHit;
 
     private bool isUsingStaff;
     private bool isUsingSSword;
@@ -56,10 +58,7 @@ public class WeaponController : MonoBehaviour
 
     private void HitscanRaycast()
     {
-        Vector2 screenCenter = new Vector2(Screen.width / 2f, Screen.height / 2f);
-
-        Ray ray = Camera.main.ScreenPointToRay(screenCenter);
-        if (Physics.Raycast(ray, out RaycastHit hitscanHit, 999f, aimColliderMask))
+        if (Physics.Raycast(cameraCenter.transform.position, cameraCenter.transform.forward, out hitscanHit, 999f, aimColliderMask))
         {
             hitscanTransform.position = hitscanHit.point;
         }
@@ -101,11 +100,10 @@ public class WeaponController : MonoBehaviour
     {
         // Debug.Log(spread);
 
-        if (Physics.Raycast(sSwordGunpoint.transform.position, spread, out RaycastHit pelletHit, 999f, aimColliderMask))
+        if (Physics.Raycast(cameraCenter.transform.position, spread, out RaycastHit pelletHit, 999f, aimColliderMask))
         {
-            GameObject pelletHole = Instantiate(sSwordSecondaryBulletHole, pelletHit.point, Quaternion.identity) as GameObject;
+            GameObject pelletHole = Instantiate(sSwordSecondaryBulletHole, pelletHit.point, Quaternion.LookRotation(pelletHit.normal)) as GameObject;
             Destroy(pelletHole, 2f);
-            pelletHole.transform.LookAt(pelletHit.point + pelletHit.normal); // esto es para cuando le ponga particulas..
 
             // Debug.Log("Shotgun Raycast se ejecuto completamente");
         }
@@ -123,10 +121,17 @@ public class WeaponController : MonoBehaviour
             for (int i = 0; i < weaponsSO.sSwordSecondaryPelletAmm; i++)
             {
                 // * dispersion
-                Vector3 sSwordSpread = sSwordGunpoint.transform.position + sSwordGunpoint.transform.forward * 1000f;
+                Vector3 sSwordSpread = cameraCenter.transform.position + cameraCenter.transform.forward * 1000f;
+                if (!weaponsSO.playerIsGrounded) // * dispersion si el jugador esta saltando
+                {
+                sSwordSpread += Random.Range(-weaponsSO.sSwordSecondarySpread * 2f, weaponsSO.sSwordSecondarySpread * 2f) * transform.right;
+                sSwordSpread += Random.Range(-weaponsSO.sSwordSecondarySpread, weaponsSO.sSwordSecondarySpread) * transform.up;
+                }else
+                {
                 sSwordSpread += Random.Range(-weaponsSO.sSwordSecondarySpread, weaponsSO.sSwordSecondarySpread) * transform.right;
                 sSwordSpread += Random.Range(-weaponsSO.sSwordSecondarySpread, weaponsSO.sSwordSecondarySpread) * transform.up;
-                sSwordSpread -= sSwordGunpoint.transform.position;
+                }
+                sSwordSpread -= cameraCenter.transform.position;
                 sSwordSpread.Normalize();
                 // * aplico un raycast con la info de dispersion
                 ShotgunRaycast(sSwordSpread);
@@ -188,7 +193,7 @@ public class WeaponController : MonoBehaviour
         {
             Debug.Log("Shooting StaffSecondary");
             
-            GameObject bulletHole = Instantiate(this.staffSecondaryBulletHole, hitscanTransform.position, Quaternion.identity) as GameObject;
+            GameObject bulletHole = Instantiate(this.staffSecondaryBulletHole, hitscanTransform.position, Quaternion.LookRotation(hitscanHit.normal)) as GameObject;
             Destroy(bulletHole, 2f);
             
             staffSecondaryMuzzleflashCooldown = weaponsSO.FlashTime + Time.time;

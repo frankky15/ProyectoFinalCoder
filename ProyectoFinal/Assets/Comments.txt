@@ -1,4 +1,14 @@
+Comentarios al tutor:
+La escena inicial consiste de una sala de comentarios y un campo de tiro donde se pueden probar las armas. también se puede encontrar 
+un portal que te lleva a la escena principal.
+La escena principal no la hicimos nosotros (escena del asset pack "LowPoly Nature Forest") por falta de tiempo, simplemente fue modificada para 
+representar vagamente la estética que queremos lograr en el juego final..
+En ella se pueden encontrar varias estructuras como una pequeña mazmorra y un campamento, así como varios tipos de enemigos.
+
+Planeamos reescribir todo lo que respecta a las armas, pero manteniendo el mismo comportamiento, para facilitar la lectura y simples del código,
+para facilitar el intercambio de información entre scripts y el intercambio de armas ingame en un futuro. (un sistema de slots)
+
 ====Packages====
 ++ Universal RP V10.8.1
 ++ Cinemachine V2.6.11
-++ Gridbox Prototype Materials v1.1.0
+++ 2D Sprite 1.0.0

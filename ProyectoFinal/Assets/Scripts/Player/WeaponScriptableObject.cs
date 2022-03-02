@@ -27,4 +27,7 @@ public class WeaponScriptableObject : ScriptableObject
     
     public float FlashTime = 0.1f;
 
+    // * Playert status * //
+    public bool playerIsGrounded;
+
     }
