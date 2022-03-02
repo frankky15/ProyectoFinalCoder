@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]//Cualquier gameObject que se le ponga este script va a tener el componente Rigidbody
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] public int heal = 10; //Variable de salud
+    [SerializeField] private float health = 300f;
     [SerializeField] private float speed = 5f; //Variable de velocidad
     [SerializeField] private float runSpeed = 7f; //Variable de velocidad al correr
     [SerializeField] private float keepDistance = 2f; //Variable para no pegarse al jugador
@@ -20,12 +20,17 @@ public class Enemy : MonoBehaviour
     
     [SerializeField] private bool moveWithWayPoints = false;//Variable para saber si se mueve con wayPoints
 
+    [SerializeField] private WeaponScriptableObject weaponSO;//Script para guardar el daño de las balas del arma del jugador
+
+
 
     private int nextWayPoint = 0;//Waypoint al que el enemigo se esta moviendo
     
     private float timerDead = 0; //Timer para saber cuanto dura la animacion de muerte
-
     private float timerAttack;//Timer para el waitAttack
+    
+    private float staffPrimaryDamageMult;
+
     private bool isFollowing;//Variable para saber si se esta siguiendo al jugador
     private bool canAttack = false;//Variable para saber cuando se puede atacar
 
@@ -41,13 +46,18 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        staffPrimaryDamageMult = weaponSO.staffPrimaryMaxDamage / weaponSO.staffPrimaryMaxSize; //Variable para calcular el daño del disparo principal segun cuanto se cargue 
+
         hitBoxAttack = transform.GetChild(0).gameObject; //Obtengo la hitbox de ataque
         hitBoxAttack.SetActive(false); //Desactivo la hitbox de ataque
+
         animator = GetComponent<AnimationsController>(); //Obtengo las animaciones
         if(moveWithWayPoints){//Si se marco la opcion de mover con wayPoints:
             wayPointsSettings();//configuro los waypoints
             nextWayPoint = 0;//Inicializo el primer waypoint
         }
+        isFollowing = false;
+        canAttack = false;
         
         player = GameObject.Find("Player");//Asigno el jugador a su variable
         if(hearRange > hearRunRange){//Si hearRange es mayor a hearRunRange
@@ -104,8 +114,8 @@ public class Enemy : MonoBehaviour
             }
         }
         else{
-            if(wayPoints.Count <= 0){
-                moveWithWayPoints = false;
+            if(wayPoints.Count <= 0){ //Si la lista de waypoints esta vacia:
+                moveWithWayPoints = false; //No se mueve por waypoints
             }
         }
         
@@ -142,7 +152,10 @@ public class Enemy : MonoBehaviour
                 moveWithWayPoints = false; //Dejo de moverme con wayPoints
             }
             else{//Sino:
-                isFollowing = false;//Dejo de perseguir
+                    isFollowing = false;//Dejo de perseguir
+                    if(wayPoints.Count > 0){ //Si la lista de waypoints no esta vacia:
+                        moveWithWayPoints = true; //me  muevo con waypoints
+                    }
             }
         }
     }
@@ -187,10 +200,11 @@ public class Enemy : MonoBehaviour
         }
     }
     void Death(){
-        if(heal <= 0){ //Si la vida es menor o igual a 0:
+        if(health <= 0){ //Si la vida es menor o igual a 0:
             moveWithWayPoints = false; //No me muevo
             isFollowing = false; //No persigo
             canAttack = false; //No puedo atacar
+            speed = 0; //No me muevo
             animator.SetDead(); //Activo la animacion de tiempo
             timerDead += Time.deltaTime; //Activo el timer de muerte
             if(timerDead >= waitTimeDead){ //Si el timer llega a waitTimeDead:
@@ -199,12 +213,40 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other){
-        if(other.CompareTag("WayPoint")){//Si entro a un waypoint:
+    private void OnTriggerEnter(Collider other)
+        {
+        if(other.CompareTag("WayPoint")) //Si entro a un waypoint:
+        {
             nextWayPoint++;//Cambio al siguiente waypoint
-            if(nextWayPoint == wayPoints.Count){//Si el siguiente waypoint apunta mas alla del maximo de la lista de waypoints:
+            if(nextWayPoint == wayPoints.Count)//Si el siguiente waypoint apunta mas alla del maximo de la lista de waypoints:
+            {
                 nextWayPoint = 0;//Vuelvo al primer waypoint
             }
         }
-    }
+        switch (other.name)
+        {
+            case "Staff Primary Projectile(Clone)": //Si recibe la bala principal del arma principal:
+                health -= staffPrimaryDamageMult * other.transform.localScale.y; //Pierde salud en base al daño de la bala y tamaño de la bala
+                animator.Hit(); //Hace una animacion para recibir el daño
+                isFollowing = true; //Empieza a perseguir al jugador
+                moveWithWayPoints = false;  //No se mueve por way points
+                Debug.Log($"Enemys health is now at: {health}");//Mensaje con la vida del enemigo
+                break;
+            case "StaffSecondary BulletHole(Clone)": //Si recibe la bala secundaria del arma principal:
+                health -= weaponSO.staffSecondaryDamage; //Pierde salud en base al daño de la bala
+                isFollowing = true; //Empieza a perseguir al jugador
+                moveWithWayPoints = false; //No se mueve por way points
+                animator.Hit(); //Hace una animacion de hit
+                Debug.Log($"Enemys health is now at: {health}");//Mensaje con la vida del enemigo
+                break;
+            case "ShotgunSwordSecondary BulletHole(Clone)": //Si recibe la bala principal del arma principal:
+                isFollowing = true; //Empieza a perseguir al jugador
+                moveWithWayPoints = false; //No se mueve por way points
+                health -= weaponSO.sSwordSecondaryDamage; //Pierde salud en base al daño de la bala
+                animator.Hit(); //Hace la animacion de hit
+                Debug.Log($"Enemys health is now at: {health}"); //Mensaje con la vida del enemigo
+                break;
+        }
+        
+        }
 }

@@ -777,16 +777,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4c0f2a5b864d8f4896255b1e1147bfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heal: 10
-  speed: 5
-  runSpeed: 7
+  health: 100
+  speed: 2
+  runSpeed: 4
   keepDistance: 2
   waitAttack: 1
   waitTimeDead: 2
-  hearRange: 20
-  hearRunRange: 30
+  hearRange: 10
+  hearRunRange: 15
   followRange: 100
   moveWithWayPoints: 1
+  weaponSO: {fileID: 11400000, guid: 72796863c1a5b05438db849d34dfdc9c, type: 2}
   wayPoints: []
 --- !u!136 &4084948870761541988
 CapsuleCollider:
