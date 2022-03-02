@@ -4,8 +4,22 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    private void Start()
+    private bool cursorIsLocked = true;
+    private void Update()
     {
-        // Application.targetFrameRate = 30;
+        if (Input.GetKeyDown(KeyCode.Escape))
+            cursorIsLocked = !cursorIsLocked;
+
+        if (cursorIsLocked)
+        {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        }
+
+        if (!cursorIsLocked)
+        {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        }
     }
 }

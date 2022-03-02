@@ -5,60 +5,44 @@ using UnityEngine;
 public class DummyScript : MonoBehaviour
 {
     private Animator animator;
-    [SerializeField] private WeaponScriptableObject weaponSO;
+    [SerializeField] private WeaponScriptableObject weaponSO; //-
     [SerializeField] private float deadResetTime = 4f;
-    [SerializeField] private float pushedResetTime = 0.1f;
     [SerializeField] private float health = 300f;
     private float healthLeft;
     private bool isDead;
     private float deadCooldown;
-    private bool wasPushed;
-    private float pushedCooldown;
-
-    private float staffPrimaryDamageMult;
+    private float staffPrimaryDamageMult;//-
+    
     private void Awake()
     {
-        staffPrimaryDamageMult = weaponSO.staffPrimaryMaxDamage / weaponSO.staffPrimaryMaxSize;
+        staffPrimaryDamageMult = weaponSO.staffPrimaryMaxDamage / weaponSO.staffPrimaryMaxSize; //-
         healthLeft = health;
         animator = GetComponent<Animator>();
     }
     private void Update()
     {
         IsDead();
-        WasPushed();
     }
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other) //-
     {
         Debug.Log($"Enemys health is now at: {healthLeft}");
 
-        if (other.name == "Staff Primary Projectile(Clone)")
+        if (other.name == "Staff Primary Projectile(Clone)") // staff carga
         {
             healthLeft -= staffPrimaryDamageMult * other.transform.localScale.y;
-            wasPushed = true;
-            pushedCooldown = pushedResetTime + Time.time;
         }
         
-        if (other.name == "StaffSecondary BulletHole(Clone)")
+        if (other.name == "StaffSecondary BulletHole(Clone)") // staff subfusil
         {
             healthLeft -= weaponSO.staffSecondaryDamage;
-            wasPushed = true;
-            pushedCooldown = pushedResetTime + Time.time;
         }
 
-        if (other.name == "ShotgunSwordSecondary BulletHole(Clone)")
+        if (other.name == "ShotgunSwordSecondary BulletHole(Clone)") // escopeta
         {
             healthLeft -= weaponSO.sSwordSecondaryDamage;
-            wasPushed = true;
-            pushedCooldown = pushedResetTime + Time.time;
         }
     }
 
-    private void WasPushed()
-    {
-        animator.SetBool("wasPushed", wasPushed);
-        if (pushedCooldown < Time.time)
-            wasPushed = false;
-    }
     private void IsDead()
     {
         animator.SetBool("isDead", isDead);
