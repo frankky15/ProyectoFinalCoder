@@ -12,17 +12,25 @@ public class WeaponController : MonoBehaviour
     [SerializeField] private GameObject staffGameobject;
     [SerializeField] private GameObject staffPrimaryProjectile;
     [SerializeField] private GameObject staffGunpoint;
+    [SerializeField] private GameObject staffSecondaryBulletHole;
     [SerializeField] private GameObject staffSecondaryMuzzleFlash;
-
-    // * Shotgun Sword variables * //
-    [SerializeField] private Transform sSwordGunpoint;
-    [SerializeField] private GameObject bulletHole;
+    private Vector3 staffInitPos;
     private float staffPrimaryCooldown;
     private float staffPrimarySize = 1f;
-    private float _staffPrimaryDamage;
     private float staffSecondaryCooldown;
     private float staffSecondaryMuzzleflashCooldown;
     private bool staffSecondaryMuzzleFlashBool;
+
+    // * Shotgun Sword variables * //
+    [SerializeField] private GameObject sSwordGameobject;
+    [SerializeField] private Transform sSwordGunpoint;
+    [SerializeField] private GameObject sSwordSecondaryBulletHole;
+    [SerializeField] private GameObject sSwordSecondaryMuzzleFlash;
+    private Vector3 sSwordInitPos;
+    private float sSwordSecondaryCooldown;
+    private float sSwordSecondaryMuzzleflashCooldown;
+    private bool sSwordSecondaryMuzzleFlashBool;
+
     private bool isUsingStaff;
     private bool isUsingSSword;
 
@@ -31,7 +39,8 @@ public class WeaponController : MonoBehaviour
     {
         isUsingStaff = true;
         isUsingSSword = false;
-        _staffPrimaryDamage = weaponsSO.staffPrimaryDamage;
+        staffInitPos = staffGameobject.transform.localPosition;
+        sSwordInitPos = sSwordGameobject.transform.localPosition;
     }
     private void Update()
     {
@@ -57,16 +66,20 @@ public class WeaponController : MonoBehaviour
     }
     private void WeaponSwitch()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.GetKeyDown(KeyCode.Alpha1) || isUsingStaff)
         {
             isUsingStaff = true;
             isUsingSSword = false;
+            sSwordGameobject.SetActive(false);
+            staffGameobject.SetActive(true);
             Debug.Log("Using Staff");
         }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
+        if (Input.GetKeyDown(KeyCode.Alpha2) || isUsingSSword)
         {
             isUsingSSword = true;
             isUsingStaff = false;
+            staffGameobject.SetActive(false);
+            sSwordGameobject.SetActive(true);
             Debug.Log("Using Sword");
         }
     }
@@ -90,7 +103,7 @@ public class WeaponController : MonoBehaviour
 
         if (Physics.Raycast(sSwordGunpoint.transform.position, spread, out RaycastHit pelletHit, 999f, aimColliderMask))
         {
-            GameObject pelletHole = Instantiate(bulletHole, pelletHit.point, Quaternion.identity) as GameObject;
+            GameObject pelletHole = Instantiate(sSwordSecondaryBulletHole, pelletHit.point, Quaternion.identity) as GameObject;
             Destroy(pelletHole, 2f);
             pelletHole.transform.LookAt(pelletHit.point + pelletHit.normal); // esto es para cuando le ponga particulas..
 
@@ -103,12 +116,14 @@ public class WeaponController : MonoBehaviour
     }
     private void ShotgunSwordSecondary()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse1))
+        sSwordSecondaryMuzzleFlash.SetActive(sSwordSecondaryMuzzleFlashBool);
+
+        if (Input.GetKeyDown(KeyCode.Mouse1) && Time.time > sSwordSecondaryCooldown)
         {
             for (int i = 0; i < weaponsSO.sSwordSecondaryPelletAmm; i++)
             {
                 // * dispersion
-                Vector3 sSwordSpread = sSwordGunpoint.transform.position + staffGunpoint.transform.forward * 1000f;
+                Vector3 sSwordSpread = sSwordGunpoint.transform.position + sSwordGunpoint.transform.forward * 1000f;
                 sSwordSpread += Random.Range(-weaponsSO.sSwordSecondarySpread, weaponsSO.sSwordSecondarySpread) * transform.right;
                 sSwordSpread += Random.Range(-weaponsSO.sSwordSecondarySpread, weaponsSO.sSwordSecondarySpread) * transform.up;
                 sSwordSpread -= sSwordGunpoint.transform.position;
@@ -117,6 +132,15 @@ public class WeaponController : MonoBehaviour
                 ShotgunRaycast(sSwordSpread);
                 //Debug.Log(hitscanTransform.position);
             }
+            sSwordSecondaryMuzzleFlashBool = true;
+            sSwordSecondaryMuzzleflashCooldown = weaponsSO.FlashTime + Time.time;
+            sSwordSecondaryCooldown = weaponsSO.sSwordSecondaryRate + Time.time;
+            sSwordGameobject.transform.localPosition -= Vector3.forward * weaponsSO.sSwordSecondaryFlinch;
+        }
+        if (sSwordSecondaryMuzzleflashCooldown < Time.time)
+        {
+            sSwordSecondaryMuzzleFlashBool = false;
+            sSwordGameobject.transform.localPosition = sSwordInitPos;
         }
     }
     // ? staff //
@@ -142,7 +166,6 @@ public class WeaponController : MonoBehaviour
             // Debug.Log("Charging Staff " + _staffPrimaryDamage);
 
             staffGunpoint.SetActive(true);
-            _staffPrimaryDamage += weaponsSO.staffPrimaryDamage * weaponsSO.staffPrimaryDamMult * Time.deltaTime * 10f;
             staffPrimarySize = Mathf.Clamp((staffPrimarySize += weaponsSO.staffPrimaryChargeTime * Time.deltaTime), 1f, weaponsSO.staffPrimaryMaxSize);
         }
         if (Input.GetKeyUp(KeyCode.Mouse0) && staffPrimaryCooldown < Time.time)
@@ -153,7 +176,6 @@ public class WeaponController : MonoBehaviour
             GameObject projectile = Instantiate(staffPrimaryProjectile, staffGunpoint.transform.position, Quaternion.LookRotation(aimDir, Vector3.up));
             projectile.transform.localScale = staffGunpoint.transform.localScale;
             staffPrimarySize = 1f;
-            _staffPrimaryDamage = weaponsSO.staffPrimaryDamage;
             staffGunpoint.SetActive(false);
             staffPrimaryCooldown = Time.time + weaponsSO.staffPrimaryRate;
         }
@@ -165,18 +187,20 @@ public class WeaponController : MonoBehaviour
         if (Input.GetKey(KeyCode.Mouse1) && staffSecondaryCooldown < Time.time)
         {
             Debug.Log("Shooting StaffSecondary");
-            staffSecondaryMuzzleflashCooldown = weaponsSO.staffSecondaryFlashTime + Time.time;
+            
+            GameObject bulletHole = Instantiate(this.staffSecondaryBulletHole, hitscanTransform.position, Quaternion.identity) as GameObject;
+            Destroy(bulletHole, 2f);
+            
+            staffSecondaryMuzzleflashCooldown = weaponsSO.FlashTime + Time.time;
             staffSecondaryMuzzleFlashBool = true;
-            if (staffSecondaryCooldown < Time.time)
-            {
-                GameObject bulletHole = Instantiate(this.bulletHole, hitscanTransform.position, Quaternion.identity) as GameObject;
-                Destroy(bulletHole, 2f);
-            }
             staffSecondaryCooldown = weaponsSO.staffSecondaryRate + Time.time;
+            staffGameobject.transform.localPosition -= Vector3.forward * weaponsSO.staffSecondaryFlinch;
         }
-        if (staffSecondaryMuzzleFlashBool && staffSecondaryMuzzleflashCooldown < Time.time)
+
+        if (staffSecondaryMuzzleflashCooldown < Time.time)
         {
             staffSecondaryMuzzleFlashBool = false;
+            staffGameobject.transform.localPosition = staffInitPos;
         }
     }
 }

@@ -18,11 +18,14 @@ MonoBehaviour:
   sSwordSecondaryPelletAmm: 6
   sSwordSecondaryRate: 1
   sSwordSecondarySpread: 40
-  staffPrimaryDamage: 5
+  sSwordSecondaryFlinch: 0.2
+  staffPrimaryMaxDamage: 150
   staffPrimaryRate: 1
   staffPrimaryDamMult: 4
   staffPrimaryChargeTime: 1
-  staffPrimaryMaxSize: 5
+  staffPrimaryMaxSize: 3
+  staffPrimaryFlinch: 1
   staffSecondaryDamage: 5
   staffSecondaryRate: 0.2
-  staffSecondaryFlashTime: 0.1
+  staffSecondaryFlinch: 0.1
+  FlashTime: 0.1
