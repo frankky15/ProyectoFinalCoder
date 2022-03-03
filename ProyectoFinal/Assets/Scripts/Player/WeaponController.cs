@@ -71,7 +71,7 @@ public class WeaponController : MonoBehaviour
             isUsingSSword = false;
             sSwordGameobject.SetActive(false);
             staffGameobject.SetActive(true);
-            Debug.Log("Using Staff");
+            // Debug.Log("Using Staff");
         }
         if (Input.GetKeyDown(KeyCode.Alpha2) || isUsingSSword)
         {
@@ -79,7 +79,7 @@ public class WeaponController : MonoBehaviour
             isUsingStaff = false;
             staffGameobject.SetActive(false);
             sSwordGameobject.SetActive(true);
-            Debug.Log("Using Sword");
+            // Debug.Log("Using Sword");
         }
     }
 

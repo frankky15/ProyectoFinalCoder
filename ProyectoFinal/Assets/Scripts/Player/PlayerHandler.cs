@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerHandler : MonoBehaviour
 {
+    [SerializeField] private float health = 200f;
     [SerializeField] private float movementSpeed;
     [SerializeField] private float jumpHeight = 2f;
     private float camAxisX = 0f;
@@ -36,6 +38,18 @@ public class PlayerHandler : MonoBehaviour
         MRotation();
 
         Gravity();
+        
+        PlayerDeath();
+    }
+        private void OnTriggerEnter(Collider other) 
+    {
+        if (other.tag == "Enemy")
+        {
+            // Debug.LogWarning("An enemy hited you!!");
+            // EnemyHandler enemy;
+            // enemy = other.GetComponent<EnemyHandler>();
+            // health -= enemy.damage;
+        }
     }
 
     private void Movement(float Speed = 1f, float rMult = 1f, float rSMult = 1f)
@@ -98,5 +112,12 @@ public class PlayerHandler : MonoBehaviour
         camAxisX = Mathf.Clamp(camAxisX, -90, 90);
         Quaternion rotX = Quaternion.Euler(camAxisX, 0f, 0f);
         camPivot.transform.localRotation = rotX;
+    }
+    private void PlayerDeath()
+    {
+        if (health <= 0)
+        {
+            SceneManager.LoadScene("PortalHub");
+        }
     }
 }

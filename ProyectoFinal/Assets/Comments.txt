@@ -1,4 +1,12 @@
 Comentarios al tutor:
+El juego que queremos hacer es una especie de hexen, pero actualizado, porque el original es injugable...
+Si no conoces el hexen, es un juego viejo al estilo doom/wolfestein/dukenukem/quake pero que estaba centrado en la magia y tenia diferentes
+aspectos de rpg como por ejemplo las clases que es lo que queremos adoptar en este juego..
+De esta forma podrias elegir ser un gerrero, un hechicero y subclases como hechicero piromantico, electrico, etc...
+Tambien nos gustaria tener un sistema de leveling en el juego... pensabamos en un arbol de habilidades pero sabemos que eso no va a pasar..
+Pero si nos gustaria que en cada nivel tengamos la posibilidad de encontrar "tokens de leveleo" ya sea explorando o matando enemigos y que
+despues se puedan usar para mejorar un aspecto del personaje, como la vida, el multiplicador de daño, velocidad, etc...
+
 La escena inicial consiste de una sala de comentarios y un campo de tiro donde se pueden probar las armas. también se puede encontrar 
 un portal que te lleva a la escena principal.
 La escena principal no la hicimos nosotros (escena del asset pack "LowPoly Nature Forest") por falta de tiempo, simplemente fue modificada para 
@@ -7,6 +15,23 @@ En ella se pueden encontrar varias estructuras como una pequeña mazmorra y un c
 
 Planeamos reescribir todo lo que respecta a las armas, pero manteniendo el mismo comportamiento, para facilitar la lectura y simples del código,
 para facilitar el intercambio de información entre scripts y el intercambio de armas ingame en un futuro. (un sistema de slots)
+
+Con respecto a las armas, hay dos armas que se cambian con los numeros, el staff (con numero 1) y el Shotgun Sword (con numero 2), ambas 
+funcionan con hitscan,y tienen una correccion de angulo para que los proyectiles siempre den con el objetivo... cada una tiene dos comportamientos,
+el staff con click izquierdo realiza su ataque principal que es un ataque de mantener para cargar, a mayor tamaño mas daño pero mas lento va el proyectil..
+con click izquierdo se realiza su ataque secundario que es un hitscan automatico..
+La Shotgun Sword es una espada, pero su ataque principal no esta implementado porque lleva una animacion, y su ataque secundario, con click derecho
+es una escopeta..
+-- Las armas no se encuentran balanceadas...
+
+-- Falta una pantalla de carga para el cambio entre escenas.
+
+-- Falta terminar el UI, hasta ahora solamente tiene el crosshair.
+
+-- El enemigo activa una hitbox para hacer daño pero no esta bien implementada por ahora, y no tuvimos tiempo para solucionarlo asi que si bien el
+player tiene la funcion de morir, no puede hacerlo...
+
+Para facilitar la jugabilidad durante la edicion puse un en el script de GameManager que con la tecla escape se active/desactive el puntero del mouse.
 
 ====Packages====
 ++ Universal RP V10.8.1
