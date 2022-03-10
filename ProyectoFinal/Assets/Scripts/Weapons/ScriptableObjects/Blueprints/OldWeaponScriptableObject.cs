@@ -1,8 +1,7 @@
-
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "WeaponScriptableObject", menuName = "ScriptableObjects/Weapons")]
-public class WeaponScriptableObject : ScriptableObject
+[CreateAssetMenu(fileName = "OldWeaponScriptableObject", menuName = "ScriptableObjects/WeaponsOld")]
+public class OldWeaponScriptableObject : ScriptableObject
 {
     // * ShotgunSword variables * //
     public float sSwordPrimaryDamage = 50f;
@@ -30,4 +29,4 @@ public class WeaponScriptableObject : ScriptableObject
     // * Playert status * //
     public bool playerIsGrounded;
 
-    }
+}

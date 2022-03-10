@@ -645,6 +645,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9315534dac328f043810f578ea591e23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 200
   movementSpeed: 5
   jumpHeight: 2
   invertYAxis: 1
@@ -659,7 +660,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 65
   stepOffset: 0.4
-  weaponStatus: {fileID: 11400000, guid: 72796863c1a5b05438db849d34dfdc9c, type: 2}
+  weaponStatus: {fileID: 11400000, guid: 03be50efcff85c84fb923e82e97cd280, type: 2}
 --- !u!114 &1488617030102938162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -672,7 +673,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec6efb6bd5375df41886d24edd4e9202, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponsSO: {fileID: 11400000, guid: 72796863c1a5b05438db849d34dfdc9c, type: 2}
+  weaponsSO: {fileID: 11400000, guid: 03be50efcff85c84fb923e82e97cd280, type: 2}
   aimColliderMask:
     serializedVersion: 2
     m_Bits: 119

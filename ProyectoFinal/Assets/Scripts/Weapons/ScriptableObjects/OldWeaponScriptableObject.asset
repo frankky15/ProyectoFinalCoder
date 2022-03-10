@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1e103ff261f62b4bbce1b9113a91512, type: 3}
-  m_Name: WeaponScriptableObject
+  m_Script: {fileID: 11500000, guid: fed66da0f6e8c2f40adc9cdfde1be5e3, type: 3}
+  m_Name: OldWeaponScriptableObject
   m_EditorClassIdentifier: 
   sSwordPrimaryDamage: 50
   sSwordPrimaryRate: 1
@@ -29,3 +29,4 @@ MonoBehaviour:
   staffSecondaryRate: 0.2
   staffSecondaryFlinch: 0.1
   FlashTime: 0.1
+  playerIsGrounded: 1

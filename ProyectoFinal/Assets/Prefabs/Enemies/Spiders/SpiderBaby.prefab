@@ -97,6 +97,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4072529262452721540, guid: 47798f58def42354f87e7546cc445ba7, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 4926004561759960448, guid: 47798f58def42354f87e7546cc445ba7, type: 3}
       propertyPath: m_Layer
       value: 2
@@ -131,7 +135,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 90
   m_CollisionDetection: 0
 --- !u!136 &3243430075621028534
 CapsuleCollider:
@@ -160,14 +164,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 50
+  damage: 50
   speed: 1
   runSpeed: 2
   keepDistance: 3
-  waitAttack: 2
+  waitAttack: 1.5
   waitTimeDead: 2
+  timeToSetAttack: 0.1
+  timeToQuitAttack: 0.5
   hearRange: 5
   hearRunRange: 10
   followRange: 30
   moveWithWayPoints: 1
-  weaponSO: {fileID: 11400000, guid: 72796863c1a5b05438db849d34dfdc9c, type: 2}
+  weaponSO: {fileID: 11400000, guid: 03be50efcff85c84fb923e82e97cd280, type: 2}
+  layersDetect:
+    serializedVersion: 2
+    m_Bits: 72
   wayPoints: []

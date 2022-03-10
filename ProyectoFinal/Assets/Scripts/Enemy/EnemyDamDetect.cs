@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyDamDetect : MonoBehaviour
 {
-    [SerializeField] WeaponScriptableObject weaponSO;
+    [SerializeField] OldWeaponScriptableObject weaponSO;
     [SerializeField] float health = 300f;
     private float staffPrimaryDamageMult;
     private void Awake()

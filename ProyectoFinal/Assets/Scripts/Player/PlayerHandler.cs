@@ -21,7 +21,7 @@ public class PlayerHandler : MonoBehaviour
     [SerializeField] private float groundDistance = 0.3f;
     [SerializeField] private LayerMask groundMask;
     [SerializeField] private float stepOffset = 0.5f;
-    [SerializeField] private WeaponScriptableObject weaponStatus;
+    [SerializeField] private OldWeaponScriptableObject weaponStatus;
     private bool isGrounded;
 
     private Vector3 velocity;

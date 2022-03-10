@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WeaponController : MonoBehaviour
 {
-    [SerializeField] private WeaponScriptableObject weaponsSO;
+    [SerializeField] private OldWeaponScriptableObject weaponsSO;
     [SerializeField] private LayerMask aimColliderMask = new LayerMask();
     [SerializeField] private Transform hitscanTransform;
 

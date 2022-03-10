@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 9097399986704658803}
   - component: {fileID: 223280127379761160}
   - component: {fileID: 434648090275486911}
-  m_Layer: 0
-  m_Name: Staff Primary Projectile
+  m_Layer: 9
+  m_Name: PyroHandPrimary
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,8 +46,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 382207e30c45c494dbb5dd458905bc35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 7
+  speed: 20
   despawnTime: 6
+  aimColliderMask:
+    serializedVersion: 2
+    m_Bits: 119
 --- !u!135 &434648090275486911
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -71,7 +74,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6992372874794144371}
   - component: {fileID: 7928497251493810215}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -103,7 +106,7 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 0.01234436, g: 1, b: 0, a: 1}
+  m_Color: {r: 0.9960785, g: 0.5529412, b: 0.16470589, a: 1}
   m_Intensity: 4
   m_Range: 10
   m_SpotAngle: 30
@@ -165,7 +168,7 @@ GameObject:
   - component: {fileID: 1475456246340845047}
   - component: {fileID: 376138828462904508}
   - component: {fileID: 5952921707932508193}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -213,7 +216,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e30a6977ab3b4ab46af2540a8272a292, type: 2}
+  - {fileID: 2100000, guid: 8568cff7885032d43917f88b209f1d9c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

@@ -6,6 +6,7 @@ public class StaffPrimary : MonoBehaviour
 {
     [SerializeField] private float speed = 10f;
     [SerializeField] private float despawnTime = 10f;
+    [SerializeField] LayerMask aimColliderMask;
     private float despawn;
     private float _speed;
     private void Start()
@@ -23,7 +24,7 @@ public class StaffPrimary : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag != "Player")
+        if (((1 << other.gameObject.layer) & aimColliderMask) != 0) // esto es para poder usar un layer mask en el ontrigger method. parece que funciona bien pero no lo entiendo.
         {
             Destroy(this.gameObject);
         }
