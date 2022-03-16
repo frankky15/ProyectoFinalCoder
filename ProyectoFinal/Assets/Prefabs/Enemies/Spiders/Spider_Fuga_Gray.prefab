@@ -690,8 +690,8 @@ GameObject:
   - component: {fileID: 4647986043577715145}
   - component: {fileID: 4540473335437116105}
   - component: {fileID: 438073525778239857}
-  - component: {fileID: 2854404217077777766}
   - component: {fileID: 4084948870761541988}
+  - component: {fileID: 4822187586289012789}
   m_Layer: 0
   m_Name: Spider_Fuga_Gray
   m_TagString: Enemy
@@ -765,36 +765,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 90
   m_CollisionDetection: 0
---- !u!114 &2854404217077777766
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4647986043587213897}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4c0f2a5b864d8f4896255b1e1147bfc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 100
-  damage: 50
-  speed: 2
-  runSpeed: 4
-  keepDistance: 2
-  waitAttack: 1
-  waitTimeDead: 2
-  timeToSetAttack: 0.1
-  timeToQuitAttack: 0.5
-  hearRange: 10
-  hearRunRange: 15
-  followRange: 100
-  moveWithWayPoints: 1
-  weaponSO: {fileID: 11400000, guid: 03be50efcff85c84fb923e82e97cd280, type: 2}
-  layersDetect:
-    serializedVersion: 2
-    m_Bits: 72
-  wayPoints: []
 --- !u!136 &4084948870761541988
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -809,6 +779,36 @@ CapsuleCollider:
   m_Height: 2.7465818
   m_Direction: 1
   m_Center: {x: 0.006092787, y: 0.6565765, z: 0.3877716}
+--- !u!114 &4822187586289012789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4647986043587213897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91b1c78f184b20649b1912f953525fac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 300
+  damage: 50
+  speed: 5
+  runSpeed: 7
+  keepDistance: 2
+  waitAttack: 1
+  waitTimeDead: 2
+  timeToSetAttack: 0.3
+  timeToQuitAttack: 0.5
+  hearRange: 20
+  hearRunRange: 30
+  followRange: 100
+  moveWithWayPoints: 1
+  weaponSO: {fileID: 11400000, guid: 03be50efcff85c84fb923e82e97cd280, type: 2}
+  layersDetect:
+    serializedVersion: 2
+    m_Bits: 73
+  wayPoints: []
 --- !u!1 &4647986043587213899
 GameObject:
   m_ObjectHideFlags: 0

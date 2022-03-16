@@ -13,7 +13,7 @@ public class MoleScript : MonoBehaviour
     private void Update()
     {
         speed = BurnAMoleScript.Instance.stayTime * 2f;
-        if (gameObject.transform.position.y < 1f) gameObject.transform.position += Vector3.up * speed * Time.deltaTime;
+        if (gameObject.transform.position.y < 1.2f) gameObject.transform.position += Vector3.up * speed * Time.deltaTime;
 
         if (health < 1)
         {

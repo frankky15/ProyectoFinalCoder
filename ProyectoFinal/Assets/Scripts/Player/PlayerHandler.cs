@@ -35,7 +35,7 @@ public class PlayerHandler : MonoBehaviour
         weaponStatus.playerIsGrounded = isGrounded;
         Movement(movementSpeed);
 
-        MRotation();
+        if (!GameManager.Instance.gameIsPaused) MRotation();
 
         Gravity();
         

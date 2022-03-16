@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1317330212276071754, guid: f6ac0d4445fec2547bd00e3620fe6b1d, type: 3}
       propertyPath: m_Name
-      value: SpiderBaby
+      value: SpiderLab
       objectReference: {fileID: 0}
     - target: {fileID: 1317330212276236650, guid: f6ac0d4445fec2547bd00e3620fe6b1d, type: 3}
       propertyPath: m_RootOrder
@@ -67,5 +67,41 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: f6ac0d4445fec2547bd00e3620fe6b1d, type: 3}
+--- !u!1 &3487838650140285347 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1317330212276071754, guid: f6ac0d4445fec2547bd00e3620fe6b1d, type: 3}
+  m_PrefabInstance: {fileID: 2463277805264680169}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3112156179877041091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3487838650140285347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91b1c78f184b20649b1912f953525fac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 300
+  damage: 50
+  speed: 5
+  runSpeed: 7
+  keepDistance: 2
+  waitAttack: 1
+  waitTimeDead: 2
+  timeToSetAttack: 0.3
+  timeToQuitAttack: 0.5
+  hearRange: 20
+  hearRunRange: 30
+  followRange: 100
+  moveWithWayPoints: 0
+  weaponSO: {fileID: 0}
+  layersDetect:
+    serializedVersion: 2
+    m_Bits: 0
+  wayPoints: []

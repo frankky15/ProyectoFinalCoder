@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private KeyCode pauseKey;
     [SerializeField] private float slowmoMult = 0.5f;
     private bool cursorIsLocked = true;
-    private bool gameIsPaused = false;
+    public bool gameIsPaused {get; private set;}
     private float defaultTimescale;
     private float defaultFixedDeltaTime;
     private float slowmoTimescale;
@@ -29,6 +29,10 @@ public class GameManager : MonoBehaviour
         defaultTimescale = Time.timeScale;
         defaultFixedDeltaTime = Time.fixedDeltaTime;
         slowmoTimescale = Time.timeScale * slowmoMult;
+    }
+    private void Start()
+    {
+        // PauseMenu.Instance.ToggleMenu(false);
     }
     private void Update()
     {
@@ -88,14 +92,24 @@ public class GameManager : MonoBehaviour
 
             if (gameIsPaused)
             {
-                cursorIsLocked = false;
-                TimeManager("pause");
+                Pause();
             }
             if (!gameIsPaused)
             {
-                cursorIsLocked = true;
-                TimeManager("default");
+                Resume();
             }
         }
+    }
+    public void Pause()
+    {
+        cursorIsLocked = false;
+        TimeManager("pause");
+        gameIsPaused = true;
+    }
+    public void Resume()
+    {
+        cursorIsLocked = true;
+        TimeManager("default");
+        gameIsPaused = false;
     }
 }

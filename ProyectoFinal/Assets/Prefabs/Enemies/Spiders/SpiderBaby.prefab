@@ -151,7 +151,7 @@ CapsuleCollider:
   m_Height: 0.9337621
   m_Direction: 1
   m_Center: {x: -0.038092136, y: 0.39721775, z: 0.023166895}
---- !u!114 &460331629
+--- !u!114 &-3227295356870346058
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -160,24 +160,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 1317330212276071754}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4c0f2a5b864d8f4896255b1e1147bfc, type: 3}
+  m_Script: {fileID: 11500000, guid: 91b1c78f184b20649b1912f953525fac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 50
+  health: 300
   damage: 50
-  speed: 1
-  runSpeed: 2
-  keepDistance: 3
-  waitAttack: 1.5
+  speed: 5
+  runSpeed: 7
+  keepDistance: 2
+  waitAttack: 1
   waitTimeDead: 2
-  timeToSetAttack: 0.1
+  timeToSetAttack: 0.3
   timeToQuitAttack: 0.5
-  hearRange: 5
-  hearRunRange: 10
-  followRange: 30
+  hearRange: 20
+  hearRunRange: 30
+  followRange: 100
   moveWithWayPoints: 1
   weaponSO: {fileID: 11400000, guid: 03be50efcff85c84fb923e82e97cd280, type: 2}
   layersDetect:
     serializedVersion: 2
-    m_Bits: 72
+    m_Bits: 73
   wayPoints: []

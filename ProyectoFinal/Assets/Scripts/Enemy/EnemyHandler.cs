@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class EnemyHandler : MonoBehaviour
 {
-    [SerializeField] private float health = 300f; //Salud de la araña
+    [SerializeField] public float health = 300f; //Salud de la araña
     public float damage = 50f; //Daño de la araña
     [SerializeField] private float speed = 5f; //Variable de velocidad
-    [SerializeField] private float runSpeed = 7f; //Variable de velocidad al correr
-    [SerializeField] private float keepDistance = 2f; //Variable para no pegarse al jugador
+    [SerializeField] protected float runSpeed = 7f; //Variable de velocidad al correr
+    [SerializeField] protected float keepDistance = 2f; //Variable para no pegarse al jugador
     [SerializeField] private float waitAttack = 1f;//Cada cuanto van a ser los ataques del enemigo
     [SerializeField] private float waitTimeDead = 2f; //Variable para saber en cuanto se termina la animacion de muerte
     [SerializeField] private float timeToSetAttack = 0.3f; //Variable para cuanto tiempo de empezada la animacion de ataque, activar el ataque
@@ -16,14 +16,14 @@ public class EnemyHandler : MonoBehaviour
 
     [SerializeField] private float hearRange = 20f; //Rango para escuchar al jugador cuando este cerca
     [SerializeField] private float hearRunRange = 30f; //Rango mas grande para escuchar al jugador correr
-    [SerializeField] private float followRange = 100f;//Rango hasta cuanto va a seguir al jugador
+    [SerializeField] protected float followRange = 100f;//Rango hasta cuanto va a seguir al jugador
 
     
-    [SerializeField] private bool moveWithWayPoints = false;//Variable para saber si se mueve con wayPoints
+    [SerializeField] protected bool moveWithWayPoints = false;//Variable para saber si se mueve con wayPoints
 
     [SerializeField] private OldWeaponScriptableObject weaponSO;//Script para guardar el daño de las balas del arma del jugador
 
-    [SerializeField] private LayerMask layersDetect = new LayerMask();
+    [SerializeField] protected LayerMask layersDetect = new LayerMask();
 
 
     private int nextWayPoint = 0;//Waypoint al que el enemigo se esta moviendo
@@ -33,17 +33,15 @@ public class EnemyHandler : MonoBehaviour
     
     private float staffPrimaryDamageMult; //Daño de la bala del disparo cargado
 
-    private bool isFollowing;//Variable para saber si se esta siguiendo al jugador
-    private bool canAttack = false;//Variable para saber cuando se puede atacar
+    protected bool isFollowing;//Variable para saber si se esta siguiendo al jugador
+    protected bool canAttack = false;//Variable para saber cuando se puede atacar
+    protected bool isHurt = false;
 
-    
-    private GameObject player;//El jugador
+    protected GameObject player;//El jugador
     private GameObject hitBoxAttack; //Collider que simula el ataque
     
-    private AnimationsController animator; //Script que activa las animaciones
 
-    private RaycastHit hit; //Variable para el raycast al moverse
-    private Vector3 rayCastDirection; //Direccion del rayo 
+    
 
     [SerializeField] private List<Transform> wayPoints; //Lista de waypoints solo se necesita el container hijo para poder poner los waypoints
 
@@ -51,22 +49,23 @@ public class EnemyHandler : MonoBehaviour
     private void Awake() { //Al instanciarse:
         isFollowing = false; //No va a empezar siguiendo al jugador
         canAttack = false; //No va a poder atacar
+        isHurt = false;
         if(moveWithWayPoints){//Si se marco la opcion de mover con wayPoints:
             wayPointsSettings();//configuro los waypoints
             nextWayPoint = 0;//Inicializo el primer waypoint
         }
     }
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
         staffPrimaryDamageMult = weaponSO.staffPrimaryMaxDamage / weaponSO.staffPrimaryMaxSize; //Variable para calcular el daño del disparo principal segun cuanto se cargue 
 
         hitBoxAttack = transform.GetChild(0).gameObject; //Obtengo la hitbox de ataque
         hitBoxAttack.SetActive(false); //Desactivo la hitbox de ataque
 
-        animator = GetComponent<AnimationsController>(); //Obtengo las animaciones
 
         player = GameObject.Find("Player");//Asigno el jugador a su variable
+
 
         if(hearRange > hearRunRange){//Si hearRange es mayor a hearRunRange
             Debug.LogError("hearRange no debe ser menor a hearRunRange");//Mostrar cartel de error
@@ -84,9 +83,8 @@ public class EnemyHandler : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
-        rayCastDirection = player.transform.position - transform.position;
        
         timerAttack += Time.deltaTime; //Activo el timer
         if(moveWithWayPoints){//Si la lista de waypoints no esta vacia y se decidio moverse por wayPoints:
@@ -99,9 +97,14 @@ public class EnemyHandler : MonoBehaviour
         
         Attack(); //Funcion de ataque
     }
+    private void FixedUpdate() {
+        if(!moveWithWayPoints){
+            transform.LookAt(player.transform.position);
+        }    
+    }
  
 
-    void wayPointsSettings(){//Funcion para facilitar la creacion de los waypoints
+    private void wayPointsSettings(){//Funcion para facilitar la creacion de los waypoints
         GameObject wayPointsContainer = transform.GetChild(1).gameObject;//Container de los waypoints
         int maxWayPoints = wayPointsContainer.transform.childCount;//Cantidad maxima de waypoints en el container
         if(maxWayPoints > 0){//Si existen wayPoints en el container:
@@ -141,7 +144,6 @@ public class EnemyHandler : MonoBehaviour
         if(transform.position != wayPoints[nextWayPoint].position){ //Si mi posicion actual es distinta a la posicion del waypoint al que me muevo:
             transform.position = Vector3.MoveTowards(transform.position,wayPoints[nextWayPoint].position, speed * Time.deltaTime); //Me muevo hacia el siguiente waypoint
         }
-        animator._animateWhenRun = true; //Activo la animacion de moverse
     }
 
     void Ears(){
@@ -177,45 +179,17 @@ public class EnemyHandler : MonoBehaviour
             }
     }
 
-    void Follow(){ //Despues agregar un raycast para que la IA esquive las paredes
+    protected virtual void Follow(){ //Despues agregar un raycast para que la IA esquive las paredes
         //Debug.Log(Vector3.Distance(transform.position,player.transform.position));
         if(isFollowing){//Si se esta persiguiendo al jugador:
-            animator._animateWhenRun = true; //Activo la animacion de moverse
+            Vector3 relativePos = player.transform.position - transform.position;
+            Quaternion rotation = Quaternion.LookRotation(relativePos);
             moveWithWayPoints = false;//Dejo de moverme con wayPoints
-            Debug.DrawRay(transform.position,rayCastDirection,Color.red); //Se muestra en el editor un raycast
-            if(Physics.Raycast(transform.position,rayCastDirection,out hit,followRange,layersDetect)){//Creo el rayo
-                if(hit.collider != null){ //Si el rayo golpea algo:
-                    if(hit.transform.tag == player.transform.tag){ //Si el objeto golpeado tiene el mismo tag que el jugador:
-                        transform.position = Vector3.MoveTowards(transform.position, player.transform.position, runSpeed * Time.deltaTime); //Sigo al objetivo
-                        Quaternion newRotation = Quaternion.LookRotation(player.transform.position - transform.position);//Creo una rotacion segun la posicion entre el jugador
-                        transform.rotation = newRotation;//le asigno la nueva rotacion a mi rotacion
-                    } 
-                    else{//Si no
-                        if(Vector3.Distance(transform.position,hit.transform.position) <= keepDistance){//Si la distancia con el objeto golpeado es menor o igual a keepDistance:
-                            transform.position = Vector3.MoveTowards(transform.position,Vector3.up, runSpeed * Time.deltaTime); //Trepo el objeto
-                        }
-                        else{ //Sino
-                            transform.position = Vector3.MoveTowards(transform.position, player.transform.position, runSpeed * Time.deltaTime); //Me sigo moviendo en direccion al jugador
-                            Quaternion newRotation = Quaternion.LookRotation(player.transform.position - transform.position);//Creo una rotacion segun la posicion entre el jugador
-                            transform.rotation = newRotation;//le asigno la nueva rotacion a mi rotacion                        }
-                        }
-                    }
-                }
-                else{ //Si no golpeo nada:
-                        transform.position = Vector3.MoveTowards(transform.position, player.transform.position, runSpeed * Time.deltaTime); //Sigo al objetivo
-                        Quaternion newRotation = Quaternion.LookRotation(player.transform.position - transform.position);//Creo una rotacion segun la posicion entre el jugador
-                        transform.rotation = newRotation;//le asigno la nueva rotacion a mi rotacion                }
-                    }
-            }   
-            else{
-                    transform.position = Vector3.MoveTowards(transform.position, player.transform.position, runSpeed * Time.deltaTime); //Sigo al objetivo
-                    Quaternion newRotation = Quaternion.LookRotation(player.transform.position - transform.position);//Creo una rotacion segun la posicion entre el jugador
-                    transform.rotation = newRotation;//le asigno la nueva rotacion a mi rotacion            }
-                }
+            transform.position = Vector3.MoveTowards(transform.position, player.transform.position, runSpeed * Time.deltaTime); //Sigo al objetivo
         }
+
         if(Vector3.Distance(transform.position,player.transform.position) <= keepDistance){//Si la distancia entre el jugador es menor o igual a keepDistance y me estoy moviendo:
-            isFollowing = false; //Dejo de moverme
-            transform.LookAt(player.transform,transform.position); //Miro hacia el jugador
+            isFollowing = false; //Dejo de moverme 
             if(timerAttack > waitAttack){ //Si el timer llega a su wait:
                 canAttack = true; //Activo el ataque
                 timerAttack = 0; //Reinicio el timer
@@ -231,10 +205,8 @@ public class EnemyHandler : MonoBehaviour
 
     }
       
-    void Attack(){
+    protected virtual void Attack(){
         if(canAttack){   //Si puede atacar:
-            animator._animateWhenRun = false; //Cancelo la animacion de correr de la araña
-            animator.Attack(); //Llamo a la funcion de animacion de ataque en el script de animacion
             if(timerAttack >= timeToSetAttack){ //Si el timer es mayor o igual al tiempo para poner el ataque:
                 hitBoxAttack.SetActive(true); //Activo el collider de ataque
             }
@@ -244,14 +216,12 @@ public class EnemyHandler : MonoBehaviour
         }
 
     }
-    void Death(){
+    protected virtual void Death(){
         if(health <= 0){ //Si la vida es menor o igual a 0:
             moveWithWayPoints = false; //No me muevo
             isFollowing = false; //No persigo
             canAttack = false; //No puedo atacar
             speed = 0; //No me muevo
-            Destroy(GetComponent<Rigidbody>()); //Destruyo el Rigidbody para evitar bugs en la animacion
-            animator.SetDead(); //Activo la animacion de muerte
             timerDead += Time.deltaTime; //Activo el timer de muerte
             if(timerDead >= waitTimeDead){ //Si el timer llega a waitTimeDead:
                 Destroy(transform.gameObject); //Me elimino de la escena
@@ -273,23 +243,23 @@ public class EnemyHandler : MonoBehaviour
         {
             case "Staff Primary Projectile(Clone)": //Si recibe la bala principal del arma principal:
                 health -= staffPrimaryDamageMult * other.transform.localScale.y; //Pierde salud en base al daño de la bala y tamaño de la bala
-                animator.Hit(); //Hace una animacion para recibir el daño
                 isFollowing = true; //Empieza a perseguir al jugador
                 moveWithWayPoints = false;  //No se mueve por way points
+                isHurt = true;
                 Debug.Log($"Enemys health is now at: {health}");//Mensaje con la vida del enemigo
                 break;
             case "StaffSecondary BulletHole(Clone)": //Si recibe la bala secundaria del arma principal:
                 health -= weaponSO.staffSecondaryDamage; //Pierde salud en base al daño de la bala
                 isFollowing = true; //Empieza a perseguir al jugador
                 moveWithWayPoints = false; //No se mueve por way points
-                animator.Hit(); //Hace una animacion de hit
+                isHurt = true;
                 Debug.Log($"Enemys health is now at: {health}");//Mensaje con la vida del enemigo
                 break;
             case "ShotgunSwordSecondary BulletHole(Clone)": //Si recibe la bala principal del arma principal:
                 isFollowing = true; //Empieza a perseguir al jugador
                 moveWithWayPoints = false; //No se mueve por way points
                 health -= weaponSO.sSwordSecondaryDamage; //Pierde salud en base al daño de la bala
-                animator.Hit(); //Hace la animacion de hit
+                isHurt = true;
                 Debug.Log($"Enemys health is now at: {health}"); //Mensaje con la vida del enemigo
                 break;
         }

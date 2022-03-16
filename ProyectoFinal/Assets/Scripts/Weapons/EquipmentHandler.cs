@@ -29,7 +29,7 @@ public class EquipmentHandler : MonoBehaviour
     #endregion
 
     #region Unity Calls
-    private void Start()
+    private void Awake()
     {
         cameraCenter = transform.Find("Look Pivot/Main Camera");
     }

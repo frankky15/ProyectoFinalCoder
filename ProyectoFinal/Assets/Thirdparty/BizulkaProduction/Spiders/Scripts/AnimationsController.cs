@@ -37,7 +37,7 @@ public class AnimationsController : MonoBehaviour
             {
                 _animator.SetBool(MovingHash, false);
             }
-            transform.rotation = Quaternion.Lerp(transform.rotation,_lastRotation,10f*Time.deltaTime);
+            //transform.rotation = Quaternion.Lerp(transform.rotation,_lastRotation,10f*Time.deltaTime);
             _lastPosition = position;
         }
     }

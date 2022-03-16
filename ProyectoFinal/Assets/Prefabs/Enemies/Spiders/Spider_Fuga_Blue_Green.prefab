@@ -24,7 +24,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1811124672733679881}
-  m_LocalRotation: {x: -6.123234e-17, y: 1, z: 6.123234e-17, w: -3.7493994e-33}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -138,14 +138,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1811124672733679885}
-  m_LocalRotation: {x: -0.7071067, y: 5.302452e-33, z: 5.302451e-33, w: 0.7071068}
+  m_LocalRotation: {x: -0.69903964, y: 0, z: 0, w: 0.71508294}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1811124672733580653}
   m_Father: {fileID: 9009383820143397981}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -88.7, y: 0, z: 0}
 --- !u!1 &1811124672733679887
 GameObject:
   m_ObjectHideFlags: 0
@@ -158,8 +158,8 @@ GameObject:
   - component: {fileID: 1811124672741106319}
   - component: {fileID: 8584071983550703907}
   - component: {fileID: 3731676752275800700}
-  - component: {fileID: 4761322100577973547}
   - component: {fileID: 5157844731444921002}
+  - component: {fileID: -8811059445725075068}
   m_Layer: 0
   m_Name: Spider_Fuga_Blue_Green
   m_TagString: Enemy
@@ -233,36 +233,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 90
   m_CollisionDetection: 0
---- !u!114 &4761322100577973547
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1811124672733679887}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4c0f2a5b864d8f4896255b1e1147bfc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 300
-  damage: 50
-  speed: 5
-  runSpeed: 7
-  keepDistance: 2
-  waitAttack: 1
-  waitTimeDead: 2
-  timeToSetAttack: 0.1
-  timeToQuitAttack: 0.5
-  hearRange: 20
-  hearRunRange: 30
-  followRange: 100
-  moveWithWayPoints: 1
-  weaponSO: {fileID: 11400000, guid: 03be50efcff85c84fb923e82e97cd280, type: 2}
-  layersDetect:
-    serializedVersion: 2
-    m_Bits: 72
-  wayPoints: []
 --- !u!136 &5157844731444921002
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -277,6 +247,36 @@ CapsuleCollider:
   m_Height: 3.0820096
   m_Direction: 1
   m_Center: {x: -0.17463338, y: 0.8446382, z: 0.113585114}
+--- !u!114 &-8811059445725075068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1811124672733679887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91b1c78f184b20649b1912f953525fac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 300
+  damage: 50
+  speed: 5
+  runSpeed: 7
+  keepDistance: 2
+  waitAttack: 1
+  waitTimeDead: 2
+  timeToSetAttack: 0.3
+  timeToQuitAttack: 0.5
+  hearRange: 20
+  hearRunRange: 30
+  followRange: 100
+  moveWithWayPoints: 1
+  weaponSO: {fileID: 11400000, guid: 03be50efcff85c84fb923e82e97cd280, type: 2}
+  layersDetect:
+    serializedVersion: 2
+    m_Bits: 73
+  wayPoints: []
 --- !u!1 &1811124672733679905
 GameObject:
   m_ObjectHideFlags: 0
