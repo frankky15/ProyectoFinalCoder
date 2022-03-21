@@ -35,7 +35,10 @@ public class EquipmentHandler : MonoBehaviour
     }
     private void Update()
     {
-        WeaponSwitch();
+        if (!GameManager.Instance.gameIsPaused) // esto no se ejecuta mientras el juego esta pausado.
+        {
+            WeaponSwitch();
+        }
         Hitscan();
     }
     #endregion
@@ -113,10 +116,12 @@ public class EquipmentHandler : MonoBehaviour
             gObjPlaceHolder0.SetActive(false);
 
             Vector3 aimDir = (hitscanTransform.position - gObjPlaceHolder0.transform.position).normalized;
+
             GameObject newProjectile = Instantiate(loadout[currentIndex].p_projectile, gObjPlaceHolder0.transform.position, Quaternion.LookRotation(aimDir, Vector3.up)) as GameObject;
             newProjectile.transform.localScale = gObjPlaceHolder0.transform.lossyScale;
             floatPlaceHolder0 = loadout[currentIndex].p_projectileMinSize / loadout[currentIndex].prefab.transform.localScale.y; // le asigno el valor de tamaño del dummy al proyectil.
-            
+            Destroy(newProjectile, 6f);
+
             fireCooldown = loadout[currentIndex].p_fireRate + Time.time;
 
             boolPlaceHolder0 = false;
@@ -127,8 +132,11 @@ public class EquipmentHandler : MonoBehaviour
 
         if (Input.GetMouseButton(1) && fireCooldown < Time.time && pulloutCooldown < Time.time)
         {
-            GameObject newBulletHole = Instantiate(bulletHole, hitscanRaycast.point, Quaternion.LookRotation(hitscanRaycast.normal)) as GameObject;
-            Destroy(newBulletHole, 5f);
+            Vector3 aimDir = (hitscanTransform.position - gObjPlaceHolder0.transform.position).normalized;
+
+            GameObject newProjectile = Instantiate(loadout[currentIndex].s_projectile, gObjPlaceHolder0.transform.position, Quaternion.LookRotation(aimDir, Vector3.up)) as GameObject;
+            Destroy(newProjectile, 5f);
+
             fireCooldown = loadout[currentIndex].s_fireRate + Time.time;
         }
     }
@@ -136,92 +144,22 @@ public class EquipmentHandler : MonoBehaviour
     {
 
     }
-
-    private float[] projSize = new float[4] {0.1f,0.3f,0.6f,0.9f};   // declaro aca las variables porque es una prueba nada mas...
-    private int projIndex;
-    private bool updown;
     private void Pyronamcer() // Libro con habilidades de fuego.
     {
         // Onload // se ejecuta la primera vez que se carga el metodo / en este caso como condicion uso el pullout time por lo que se ejecuta por un tiempo reducido.
         if (pulloutCooldown > Time.time)
         {
             gObjPlaceHolder0 = GameObject.Find("Look Pivot/Weapons/Hand(Clone)/Model/Sphere"); // el dummy del proyectil durante la carga.
-            updown = false;
         }
 
         // primary // es como un arpegiador va aumentando el size y cuando llega al maximo empieza a bajar, asi sucesivamente...
-        if (Input.GetMouseButton(0) && fireCooldown < Time.time)
+        if (Input.GetMouseButton(0) && fireCooldown < Time.time && pulloutCooldown < Time.time)
         {
             Vector3 aimDir = (hitscanTransform.position - gObjPlaceHolder0.transform.position).normalized;
 
-            if(!updown)
-            switch(projIndex)
-            {
-                case 0:
-                    GameObject newProjectile0 = Instantiate(loadout[currentIndex].p_projectile, gObjPlaceHolder0.transform.position, Quaternion.LookRotation(aimDir, Vector3.up)) as GameObject;
-                    newProjectile0.transform.localScale = new Vector3(projSize[projIndex], projSize[projIndex], projSize[projIndex]);
-                    Destroy(newProjectile0, 2f);
-                    projIndex ++;
-                    fireCooldown = loadout[currentIndex].p_fireRate + Time.time;
-                    break; 
-                case 1:
-                    GameObject newProjectile1 = Instantiate(loadout[currentIndex].p_projectile, gObjPlaceHolder0.transform.position, Quaternion.LookRotation(aimDir, Vector3.up)) as GameObject;
-                    newProjectile1.transform.localScale = new Vector3(projSize[projIndex], projSize[projIndex], projSize[projIndex]);
-                    Destroy(newProjectile1, 2f);
-                    projIndex ++;
-                    fireCooldown = loadout[currentIndex].p_fireRate + Time.time;
-                    break; 
-                case 2:
-                    GameObject newProjectile2 = Instantiate(loadout[currentIndex].p_projectile, gObjPlaceHolder0.transform.position, Quaternion.LookRotation(aimDir, Vector3.up)) as GameObject;
-                    newProjectile2.transform.localScale = new Vector3(projSize[projIndex], projSize[projIndex], projSize[projIndex]);
-                    Destroy(newProjectile2, 2f);
-                    projIndex ++;
-                    fireCooldown = loadout[currentIndex].p_fireRate + Time.time;
-                    break; 
-                case 3:
-                    GameObject newProjectile3 = Instantiate(loadout[currentIndex].p_projectile, gObjPlaceHolder0.transform.position, Quaternion.LookRotation(aimDir, Vector3.up)) as GameObject;
-                    newProjectile3.transform.localScale = new Vector3(projSize[projIndex], projSize[projIndex], projSize[projIndex]);
-                    Destroy(newProjectile3, 2f);
-                    updown = true;
-                    fireCooldown = loadout[currentIndex].p_fireRate + Time.time;
-                    break;
-            }
-            if (updown)
-            switch(projIndex)
-            {
-                case 0:
-                    GameObject newProjectile0 = Instantiate(loadout[currentIndex].p_projectile, gObjPlaceHolder0.transform.position, Quaternion.LookRotation(aimDir, Vector3.up)) as GameObject;
-                    newProjectile0.transform.localScale = new Vector3(projSize[projIndex], projSize[projIndex], projSize[projIndex]);
-                    Destroy(newProjectile0, 2f);
-                    updown = false;
-                    fireCooldown = loadout[currentIndex].p_fireRate + Time.time;
-                    break; 
-                case 1:
-                    GameObject newProjectile1 = Instantiate(loadout[currentIndex].p_projectile, gObjPlaceHolder0.transform.position, Quaternion.LookRotation(aimDir, Vector3.up)) as GameObject;
-                    newProjectile1.transform.localScale = new Vector3(projSize[projIndex], projSize[projIndex], projSize[projIndex]);
-                    Destroy(newProjectile1, 2f);
-                    projIndex --;
-                    fireCooldown = loadout[currentIndex].p_fireRate + Time.time;
-                    break; 
-                case 2:
-                    GameObject newProjectile2 = Instantiate(loadout[currentIndex].p_projectile, gObjPlaceHolder0.transform.position, Quaternion.LookRotation(aimDir, Vector3.up)) as GameObject;
-                    newProjectile2.transform.localScale = new Vector3(projSize[projIndex], projSize[projIndex], projSize[projIndex]);
-                    Destroy(newProjectile2, 2f);
-                    projIndex --;
-                    fireCooldown = loadout[currentIndex].p_fireRate + Time.time;
-                    break; 
-                case 3:
-                    GameObject newProjectile3 = Instantiate(loadout[currentIndex].p_projectile, gObjPlaceHolder0.transform.position, Quaternion.LookRotation(aimDir, Vector3.up)) as GameObject;
-                    newProjectile3.transform.localScale = new Vector3(projSize[projIndex], projSize[projIndex], projSize[projIndex]);
-                    Destroy(newProjectile3, 2f);
-                    projIndex --;
-                    fireCooldown = loadout[currentIndex].p_fireRate + Time.time;
-                    break;
-            }
-        }
-        if (Input.GetMouseButtonUp(0))
-        {
-            updown = false;
+            GameObject newProjectile = Instantiate(loadout[currentIndex].p_projectile, gObjPlaceHolder0.transform.position, Quaternion.LookRotation(aimDir, Vector3.up)) as GameObject;
+            Destroy(newProjectile, 2f);
+            fireCooldown = loadout[currentIndex].p_fireRate + Time.time;
         }
     }
     #endregion

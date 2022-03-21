@@ -8,8 +8,6 @@ public class WeaponScriptableObject : ScriptableObject
 
      // * Primary * //
     public GameObject p_projectile;
-    public float p_damage;
-    public float p_damMult;
     public float p_castTime;
     public float p_fireRate;
     public float p_magAmount;
@@ -18,11 +16,10 @@ public class WeaponScriptableObject : ScriptableObject
     public float p_chargeTime;
     public float p_projectileMinSize;
     public float p_projectileMaxSize;
+    public float p_lifeTime;
 
     // * Secondary * //
     public GameObject s_projectile;
-    public float s_damage;
-    public float s_damMult;
     public float s_castTime;
     public float s_fireRate;
     public float s_magAmount;
@@ -31,6 +28,7 @@ public class WeaponScriptableObject : ScriptableObject
     public float s_chargeTime;
     public float s_projectileMinSize;
     public float s_projectileMaxSize;
+    public float s_lifeTime;
 
     // * Misc * //
     public float flashTime = 0.1f;

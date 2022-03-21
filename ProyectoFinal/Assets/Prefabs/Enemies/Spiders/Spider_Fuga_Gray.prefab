@@ -791,19 +791,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91b1c78f184b20649b1912f953525fac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 300
-  damage: 50
-  speed: 5
-  runSpeed: 7
-  keepDistance: 2
-  waitAttack: 1
-  waitTimeDead: 2
-  timeToSetAttack: 0.3
-  timeToQuitAttack: 0.5
-  hearRange: 20
-  hearRunRange: 30
-  followRange: 100
   moveWithWayPoints: 1
+  vars: {fileID: 11400000, guid: d15620f0f3af09946b2966b279f16167, type: 2}
   weaponSO: {fileID: 11400000, guid: 03be50efcff85c84fb923e82e97cd280, type: 2}
   layersDetect:
     serializedVersion: 2

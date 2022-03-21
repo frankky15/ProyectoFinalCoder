@@ -399,6 +399,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &187866503 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2614086224786819325, guid: 55cdb2ddd2b536948babc384cccd2578, type: 3}
+  m_PrefabInstance: {fileID: 2614086223700622935}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6a84f7c5797f6b408c6ecfba2801d7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &400967020
 GameObject:
   m_ObjectHideFlags: 0
@@ -408,7 +419,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 400967021}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ground Check
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1606,7 +1617,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3728266313248611336}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ROOT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1636,7 +1647,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5645699004246490763}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: DEF-base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1898,7 +1909,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2016522297647592559}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: DEF-head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1918,7 +1929,7 @@ GameObject:
   - component: {fileID: 1570981535}
   - component: {fileID: 1570981528}
   - component: {fileID: 1570981534}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: training_dummy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -2054,6 +2065,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1101830082, guid: ae2d4302d45fd724eaad3f3bd55a8e10, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 187866503}
+    - target: {fileID: 1101830082, guid: ae2d4302d45fd724eaad3f3bd55a8e10, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Resume
+      objectReference: {fileID: 0}
     - target: {fileID: 6624877638408659982, guid: ae2d4302d45fd724eaad3f3bd55a8e10, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -2153,7 +2172,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8033125609706622779}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ARM_training_dummy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2170,7 +2189,7 @@ GameObject:
   m_Component:
   - component: {fileID: 334251544568575042}
   - component: {fileID: 2476776925308570927}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: training_dummy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2186,7 +2205,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 651559520340403641}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: DEF-sword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2202,7 +2221,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8765436389211333717}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: DEF-hands
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2218,7 +2237,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 493139339286548352}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: DEF-body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2249,7 +2268,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5282924382612325409}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: DEF-shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}

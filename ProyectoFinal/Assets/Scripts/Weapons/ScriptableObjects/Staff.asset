@@ -15,8 +15,6 @@ MonoBehaviour:
   weaponName: Staff
   prefab: {fileID: 2350084450119610748, guid: 6f78d3217f19d584bbc5ca0eafd2d794, type: 3}
   p_projectile: {fileID: 1782435093766045894, guid: 2cd23f20617661f46946fd279d992015, type: 3}
-  p_damage: 0
-  p_damMult: 0
   p_castTime: 1
   p_fireRate: 2
   p_magAmount: 0
@@ -25,16 +23,16 @@ MonoBehaviour:
   p_chargeTime: 0
   p_projectileMinSize: 1
   p_projectileMaxSize: 3
-  s_projectile: {fileID: 0}
-  s_damage: 0
-  s_damMult: 0
+  p_lifeTime: 0
+  s_projectile: {fileID: 1782435093766045894, guid: 818a6ec529d3b3b4ea72ad5a5a764613, type: 3}
   s_castTime: 0
-  s_fireRate: 0.1
+  s_fireRate: 0.2
   s_magAmount: 0
   s_pelletAmount: 0
   s_spread: 0
   s_chargeTime: 0
   s_projectileMinSize: 0
   s_projectileMaxSize: 0
+  s_lifeTime: 0
   flashTime: 0.1
   pulloutTime: 0.5

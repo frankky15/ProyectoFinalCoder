@@ -16,27 +16,26 @@ public class SpiderHandler : EnemyHandler
     protected override void Update() {
         base.Update();
         SetAnimations();
-        
     }
 
    protected override void Follow(){
        base.Follow();
         Debug.DrawRay(transform.position,rayCastDirection,Color.red); //Se muestra en el editor un raycast
         rayCastDirection = player.transform.position - transform.position;
-        if(isFollowing){
-            if(Physics.Raycast(transform.position,rayCastDirection,out hit,followRange,layersDetect)){//Creo el rayo
+        if(isFollowing && !isDeath){
+            if(Physics.Raycast(transform.position,rayCastDirection,out hit, vars.followRange,layersDetect)){//Creo el rayo
                 if(hit.collider != null){ //Si el rayo golpea algo:
                     if(hit.transform.tag == player.transform.tag){ //Si el objeto golpeado tiene el mismo tag que el jugador:
-                        transform.position = Vector3.MoveTowards(transform.position, player.transform.position, runSpeed * Time.deltaTime); //Sigo al objetivo
+                        transform.position = Vector3.MoveTowards(transform.position, player.transform.position, vars.runSpeed * Time.deltaTime); //Sigo al objetivo
                         Quaternion newRotation = Quaternion.LookRotation(player.transform.position - transform.position);//Creo una rotacion segun la posicion entre el jugador
                         transform.rotation = newRotation;//le asigno la nueva rotacion a mi rotacion
                     } 
                     else{//Si no
-                        if(Vector3.Distance(transform.position,hit.transform.position) <= keepDistance){//Si la distancia con el objeto golpeado es menor o igual a keepDistance:
-                            transform.position = Vector3.MoveTowards(transform.position,Vector3.up, runSpeed * Time.deltaTime); //Trepo el objeto
+                        if(Vector3.Distance(transform.position,hit.transform.position) <= vars.keepDistance){//Si la distancia con el objeto golpeado es menor o igual a vars.keepDistance:
+                            transform.position = Vector3.MoveTowards(transform.position,Vector3.up, vars.runSpeed * Time.deltaTime); //Trepo el objeto
                         }
                         else{ //Sino
-                            transform.position = Vector3.MoveTowards(transform.position, player.transform.position, runSpeed * Time.deltaTime); //Me sigo moviendo en direccion al jugador
+                            transform.position = Vector3.MoveTowards(transform.position, player.transform.position, vars.runSpeed * Time.deltaTime); //Me sigo moviendo en direccion al jugador
                             Quaternion newRotation = Quaternion.LookRotation(player.transform.position - transform.position);//Creo una rotacion segun la posicion entre el jugador
                             transform.rotation = newRotation;//le asigno la nueva rotacion a mi rotacion                        }
                         }

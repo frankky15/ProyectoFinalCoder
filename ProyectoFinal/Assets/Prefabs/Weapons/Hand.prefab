@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4971655430505421151}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 3471617354781271365}
   - component: {fileID: 8287396297425983507}
   - component: {fileID: 8776086359355397626}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -138,7 +138,7 @@ GameObject:
   - component: {fileID: 1351931587842584244}
   - component: {fileID: 2019034490272594940}
   - component: {fileID: 7460423001106887802}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -233,7 +233,7 @@ GameObject:
   - component: {fileID: 4071944053424710250}
   - component: {fileID: 6443991124375332119}
   - component: {fileID: 1989569294218643472}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -326,7 +326,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3177748719766341171}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -363,7 +363,7 @@ GameObject:
   - component: {fileID: 7269239633736364768}
   - component: {fileID: 6668040458575269138}
   - component: {fileID: 680590153927794207}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -456,7 +456,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8934872534273073022}
   - component: {fileID: 3997250049020933812}
-  m_Layer: 9
+  m_Layer: 3
   m_Name: Glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}

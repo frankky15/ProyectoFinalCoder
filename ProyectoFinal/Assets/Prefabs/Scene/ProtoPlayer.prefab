@@ -105,7 +105,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2760724692180688543}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Weapons
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -165,7 +165,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2760724692334156394}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: HitscanTransform
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -201,7 +201,7 @@ GameObject:
   - component: {fileID: 2760724693246369362}
   - component: {fileID: 2760724693246369365}
   - component: {fileID: 2760724693246369364}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -384,7 +384,7 @@ GameObject:
   - component: {fileID: 2760724694041447961}
   - component: {fileID: 2760724694041447960}
   - component: {fileID: 2760724694041447963}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: DebugSphere
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -477,7 +477,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2760724694043224148}
   - component: {fileID: 2760724694043224149}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Glow
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -624,7 +624,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 65
   stepOffset: 0.4
-  weaponStatus: {fileID: 11400000, guid: 03be50efcff85c84fb923e82e97cd280, type: 2}
 --- !u!114 &2760724694046639776
 MonoBehaviour:
   m_ObjectHideFlags: 0

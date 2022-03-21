@@ -21,7 +21,6 @@ public class PlayerHandler : MonoBehaviour
     [SerializeField] private float groundDistance = 0.3f;
     [SerializeField] private LayerMask groundMask;
     [SerializeField] private float stepOffset = 0.5f;
-    [SerializeField] private OldWeaponScriptableObject weaponStatus;
     private bool isGrounded;
 
     private Vector3 velocity;
@@ -32,10 +31,9 @@ public class PlayerHandler : MonoBehaviour
     }
     private void Update()
     {
-        weaponStatus.playerIsGrounded = isGrounded;
         Movement(movementSpeed);
 
-        if (!GameManager.Instance.gameIsPaused) MRotation();
+        if (!GameManager.Instance.gameIsPaused) MRotation(); // esto no se ejecuta mientras el juego esta en pausa.
 
         Gravity();
         
@@ -45,10 +43,10 @@ public class PlayerHandler : MonoBehaviour
     {
         if (other.tag == "Enemy")
         {
-            // Debug.LogWarning("An enemy hited you!!");
             // EnemyHandler enemy;
             // enemy = other.GetComponent<EnemyHandler>();
-            // health -= enemy.damage;
+            // health -= other.GetComponent<SpiderHandler>().damage;
+            Debug.LogWarning($"An enemy hited you!! health is now at: {health}");
         }
     }
 
@@ -117,7 +115,7 @@ public class PlayerHandler : MonoBehaviour
     {
         if (health <= 0)
         {
-            SceneManager.LoadScene("PortalHub");
+            SceneManager.LoadScene("MainMenu");
         }
     }
 }
