@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
 public class PlayerHandler : MonoBehaviour
 {
+    [SerializeField] private UnityEvent onPlayerDeath;
     [SerializeField] private float health = 200f;
     [SerializeField] private float movementSpeed;
     [SerializeField] private float jumpHeight = 2f;
@@ -41,12 +43,12 @@ public class PlayerHandler : MonoBehaviour
     }
         private void OnTriggerEnter(Collider other) 
     {
-        if (other.tag == "Enemy")
+        if (other.tag == "Spider")
         {
-            // EnemyHandler enemy;
-            // enemy = other.GetComponent<EnemyHandler>();
-            // health -= other.GetComponent<SpiderHandler>().damage;
-            Debug.LogWarning($"An enemy hited you!! health is now at: {health}");
+            SpiderHandler enemy;
+            enemy = other.GetComponentInParent<SpiderHandler>();
+            health -= enemy.damage;
+            // Debug.Log($"An enemy hited you!! health is now at: {health}");
         }
     }
 
@@ -115,7 +117,10 @@ public class PlayerHandler : MonoBehaviour
     {
         if (health <= 0)
         {
-            SceneManager.LoadScene("MainMenu");
+            // SceneManager.LoadScene("MainMenu");
+            // Debug.Log("El jugador ha muerto");
+           onPlayerDeath?.Invoke(); // recarga la escena con pantalla de carga.
+           Debug.Log("evento onPlayerDeath llamado desde metodo PlayerDeath()");
         }
     }
 }

@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 
 public class EnemyHandler : MonoBehaviour
 {
@@ -13,6 +15,8 @@ public class EnemyHandler : MonoBehaviour
     [SerializeField] private OldWeaponScriptableObject weaponSO;//Script para guardar el daño de las balas del arma del jugador
 
     [SerializeField] protected LayerMask layersDetect = new LayerMask();
+
+    public event Action<int> OnEnemyDeath;
 
 
     private int nextWayPoint = 0;//Waypoint al que el enemigo se esta moviendo
@@ -48,6 +52,12 @@ public class EnemyHandler : MonoBehaviour
     // Start is called before the first frame update
     protected virtual void Start()
     {
+        //transform.parent = GameObject.Find("EnemiesContainer").transform;
+        OnEnemyDeath += GameObject.Find("UI").GetComponent<PointsManager>().morePoints;
+        Debug.Log("PointsManager del UI se suscribio al evento de OnEnemyDeath");
+        OnEnemyDeath += OnEnemyDeathCloseReaction;
+        Debug.Log("OnEnemyDeathCloseReaction se suscribio al evento de OnEnemyDeath");
+
         staffPrimaryDamageMult = weaponSO.staffPrimaryMaxDamage / weaponSO.staffPrimaryMaxSize; //Variable para calcular el daño del disparo principal segun cuanto se cargue 
 
         hitBoxAttack = transform.GetChild(0).gameObject; //Obtengo la hitbox de ataque
@@ -77,7 +87,7 @@ public class EnemyHandler : MonoBehaviour
        
         timerAttack += Time.deltaTime; //Activo el timer
         if(moveWithWayPoints){//Si la lista de waypoints no esta vacia y se decidio moverse por wayPoints:
-            wayPointsMove();//me muevo por waypoints
+            // wayPointsMove();//me muevo por waypoints
         }
         Ears();//Funcion para escuchar cuando el jugador este cerca
         Follow();//Funcion para seguir al jugador
@@ -216,10 +226,12 @@ public class EnemyHandler : MonoBehaviour
     protected virtual void Death(){
         if(health <= 0){ //Si la vida es menor o igual a 0:
             isDeath = true;
+            
             Destroy(GetComponent<Collider>());
             GetComponent<Rigidbody>().isKinematic = true;
             timerDead += Time.deltaTime; //Activo el timer de muerte
             if(timerDead >= vars.waitTimeDead){ //Si el timer llega a vars.waitTimeDead:
+                OnEnemyDeath?.Invoke(vars.points);
                 Destroy(transform.gameObject); //Me elimino de la escena
             }
         }
@@ -259,5 +271,8 @@ public class EnemyHandler : MonoBehaviour
                 Debug.Log($"Enhealth is now at: {health}"); //Mensaje con la vida del enemigo
                 break;
         }
+    }
+    protected virtual void OnEnemyDeathCloseReaction(int Distance){
+        Debug.Log("OnEnemyDeathCloseReaction recibio la llamada al evento");
     }
 }

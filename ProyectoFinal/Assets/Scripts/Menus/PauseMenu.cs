@@ -9,7 +9,15 @@ public class PauseMenu : MonoBehaviour
     private GameObject menu;
     private void Awake()
     {
-        Instance = this;
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
         menu = GameObject.Find("Menu");
     }
     private void Update()

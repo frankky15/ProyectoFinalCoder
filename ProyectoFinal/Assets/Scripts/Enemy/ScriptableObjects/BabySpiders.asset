@@ -12,11 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d760eb16629f3744b9a707e5ef148b3, type: 3}
   m_Name: BabySpiders
   m_EditorClassIdentifier: 
-  health: 300
   damage: 50
   speed: 5
   runSpeed: 7
-  keepDistance: 2
+  keepDistance: 1.5
   waitAttack: 1
   waitTimeDead: 2
   timeToSetAttack: 0.3

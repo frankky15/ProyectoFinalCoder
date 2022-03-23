@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1811124672733580585}
   - component: {fileID: 1811124672745184333}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Spider_Fuga_Blue_Green
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,7 +124,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1811124672733580589}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Spider_Fuga.c
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -160,7 +160,7 @@ GameObject:
   - component: {fileID: 3731676752275800700}
   - component: {fileID: 5157844731444921002}
   - component: {fileID: -8811059445725075068}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Spider_Fuga_Blue_Green
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -259,6 +259,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91b1c78f184b20649b1912f953525fac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 300
   moveWithWayPoints: 1
   vars: {fileID: 11400000, guid: bd35f5f63e6c9e14387142a2d02d82b7, type: 2}
   weaponSO: {fileID: 11400000, guid: 03be50efcff85c84fb923e82e97cd280, type: 2}
@@ -275,7 +276,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1811124672733580609}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Paws5.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -305,7 +306,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1811124672733580611}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Paws5.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -335,7 +336,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1811124672733580613}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Paws4.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -365,7 +366,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1811124672733580615}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Paws4.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -395,7 +396,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1811124672733580617}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Paws3.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -426,7 +427,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1811124672733580619}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Paws3.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -457,7 +458,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1811124672733580621}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Paws2.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -488,7 +489,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1811124672733580623}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Paws2.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -519,7 +520,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1811124672733580625}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Paws9.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -550,7 +551,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1811124672733580627}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Paws9.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -581,7 +582,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1811124672733580629}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Paws8.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -611,7 +612,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1811124672733580631}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Paws8.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -641,7 +642,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1811124672733580633}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Paws7.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -672,7 +673,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1811124672733580635}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Paws7.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -703,7 +704,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1811124672733580637}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Paws6.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -734,7 +735,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1811124672733580639}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Paws6.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -765,7 +766,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1811124672733580641}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Mouth1.L.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -795,7 +796,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1811124672733580643}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Mouth1.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -825,7 +826,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1811124672733580645}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Mouth.R.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -856,7 +857,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1811124672733580647}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Mouth.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -887,7 +888,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1811124672733580649}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Mouth.L.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -918,7 +919,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1811124672733580651}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Mouth.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -949,7 +950,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1811124672733580653}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bone.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -992,7 +993,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1811124672733580655}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1022,7 +1023,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1811124672733580657}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Paws10.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1053,7 +1054,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1811124672733580659}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Paws10.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1084,7 +1085,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1811124672733580661}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Paws1.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1115,7 +1116,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1811124672733580663}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Paws1.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1146,7 +1147,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1811124672733580665}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Paws.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1176,7 +1177,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1811124672733580667}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Paws.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1206,7 +1207,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1811124672733580669}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Mouth1.R.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1236,7 +1237,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1811124672733580671}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Mouth1.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1266,7 +1267,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9009383820143397981}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ModelPartsContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1299,9 +1300,9 @@ GameObject:
   m_Component:
   - component: {fileID: 868800785285838577}
   - component: {fileID: 5435493135358870419}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: HitBoxAttack
-  m_TagString: Enemy
+  m_TagString: Spider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1342,7 +1343,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5884919753377710507}
-  m_Layer: 2
+  m_Layer: 8
   m_Name: WayPointsContainer
   m_TagString: WayPoint
   m_Icon: {fileID: 0}

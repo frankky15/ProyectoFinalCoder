@@ -5,6 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "EnemyVar", menuName = "ScriptableObjects/EnemyVar")]
 public class EnemyVar : ScriptableObject
 {
+    public int points = 10;
+
     public float damage = 50f; //Daño de la araña
     public float speed = 5f; //Variable de velocidad
     public float runSpeed = 7f; //Variable de velocidad al correr

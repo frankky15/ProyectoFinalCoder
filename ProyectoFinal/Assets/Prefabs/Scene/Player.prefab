@@ -660,7 +660,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 65
   stepOffset: 0.4
-  weaponStatus: {fileID: 11400000, guid: 03be50efcff85c84fb923e82e97cd280, type: 2}
 --- !u!114 &1488617030102938162
 MonoBehaviour:
   m_ObjectHideFlags: 0

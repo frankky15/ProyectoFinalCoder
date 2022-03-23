@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
@@ -8,11 +9,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] private KeyCode toggleCursorKey;
     [SerializeField] private KeyCode pauseKey;
     [SerializeField] private float slowmoMult = 0.5f;
-    private bool cursorIsLocked = true;
+    public bool cursorIsLocked = true;
     public bool gameIsPaused {get; private set;}
     private float defaultTimescale;
     private float defaultFixedDeltaTime;
     private float slowmoTimescale;
+    [SerializeField] private UnityEvent onPause;
+    [SerializeField] private UnityEvent onResume;
 
     private void Awake()
     {
@@ -92,11 +95,13 @@ public class GameManager : MonoBehaviour
 
             if (gameIsPaused)
             {
-                Pause();
+                onPause?.Invoke();
+                Debug.Log("evento onPause llamado desde PauseMenu()");
             }
             if (!gameIsPaused)
             {
-                Resume();
+                onResume?.Invoke();
+                Debug.Log("evento onResume llamado desde PauseMenu()");
             }
         }
     }
@@ -105,11 +110,15 @@ public class GameManager : MonoBehaviour
         cursorIsLocked = false;
         TimeManager("pause");
         gameIsPaused = true;
+
+        Debug.Log("llamada recivida desde Pause()");
     }
     public void Resume()
     {
         cursorIsLocked = true;
         TimeManager("default");
         gameIsPaused = false;
+
+        Debug.Log("llamada recivida desde Resume()");
     }
 }
