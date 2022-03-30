@@ -6,10 +6,10 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/PortalHub.unity
+    path: Assets/Scenes/PortalHub/PortalHub.unity
     guid: 07e71313f28ffbc408732a189a189727
   - enabled: 1
-    path: Assets/Scenes/Forest.unity
+    path: Assets/Scenes/Forest/Forest.unity
     guid: 64c7cfbf51863ca4dbc3b34c60b0b783
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity

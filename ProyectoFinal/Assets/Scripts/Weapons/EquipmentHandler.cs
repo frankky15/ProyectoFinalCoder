@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EquipmentHandler : MonoBehaviour
 {
+    public static EquipmentHandler Instance;
     #region Variables
     // [SerializeField] private WeaponScriptableObject[] loadout; // El armamento en un array, para agregar armas desde el editor simplemente agregar un nuevo WeaponScriptableObject con stats del arma.
     [SerializeField] private List<WeaponScriptableObject> loadout = new List<WeaponScriptableObject>(); // lo pase a lista.
@@ -25,12 +26,23 @@ public class EquipmentHandler : MonoBehaviour
     private float floatPlaceHolder1;
     private bool boolPlaceHolder0;
     private bool boolPlaceHolder1;
+    public bool isShooting {get; private set;}
 
     #endregion
 
     #region Unity Calls
     private void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
         cameraCenter = transform.Find("Look Pivot/Main Camera");
     }
     private void Update()
@@ -104,6 +116,7 @@ public class EquipmentHandler : MonoBehaviour
             gObjPlaceHolder0.SetActive(true);
             
             boolPlaceHolder0 = true; // condicional para que el siguiente if no se ejecute sin el primero.
+            isShooting = true;
         }
         if (Input.GetMouseButton(0) && fireCooldown < Time.time && pulloutCooldown < Time.time && boolPlaceHolder0) // tuve que poner la condicion de null porque aveces en el primer frame no tiene la referencia del gObj..
         {
@@ -125,6 +138,7 @@ public class EquipmentHandler : MonoBehaviour
             fireCooldown = loadout[currentIndex].p_fireRate + Time.time;
 
             boolPlaceHolder0 = false;
+            isShooting = false;
         }
         if (gObjPlaceHolder0 != null) gObjPlaceHolder0.transform.localScale = new Vector3(floatPlaceHolder0, floatPlaceHolder0, floatPlaceHolder0);
 
@@ -138,6 +152,11 @@ public class EquipmentHandler : MonoBehaviour
             Destroy(newProjectile, 5f);
 
             fireCooldown = loadout[currentIndex].s_fireRate + Time.time;
+            isShooting = true;
+        }
+        if (Input.GetMouseButtonUp(1))
+        {
+            isShooting = false;
         }
     }
     private void Electromancer() // Libro con habilidades electricas.
@@ -160,6 +179,11 @@ public class EquipmentHandler : MonoBehaviour
             GameObject newProjectile = Instantiate(loadout[currentIndex].p_projectile, gObjPlaceHolder0.transform.position, Quaternion.LookRotation(aimDir, Vector3.up)) as GameObject;
             Destroy(newProjectile, 2f);
             fireCooldown = loadout[currentIndex].p_fireRate + Time.time;
+            isShooting = true;
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
+            isShooting = false;
         }
     }
     #endregion

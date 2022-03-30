@@ -44,23 +44,24 @@ public class EnemyHandler : MonoBehaviour
         isFollowing = false; //No va a empezar siguiendo al jugador
         canAttack = false; //No va a poder atacar
         isHurt = false;
-        if(moveWithWayPoints){//Si se marco la opcion de mover con wayPoints:
-            wayPointsSettings();//configuro los waypoints
-            nextWayPoint = 0;//Inicializo el primer waypoint
-        }
+        
     }
     // Start is called before the first frame update
     protected virtual void Start()
     {
         //transform.parent = GameObject.Find("EnemiesContainer").transform;
+        hitBoxAttack = transform.GetChild(0).gameObject; //Obtengo la hitbox de ataque
         OnEnemyDeath += GameObject.Find("UI").GetComponent<PointsManager>().morePoints;
+        if(moveWithWayPoints){//Si se marco la opcion de mover con wayPoints:
+            wayPointsSettings();//configuro los waypoints
+            nextWayPoint = 0;//Inicializo el primer waypoint
+        }
         Debug.Log("PointsManager del UI se suscribio al evento de OnEnemyDeath");
         OnEnemyDeath += OnEnemyDeathCloseReaction;
         Debug.Log("OnEnemyDeathCloseReaction se suscribio al evento de OnEnemyDeath");
 
         staffPrimaryDamageMult = weaponSO.staffPrimaryMaxDamage / weaponSO.staffPrimaryMaxSize; //Variable para calcular el daño del disparo principal segun cuanto se cargue 
 
-        hitBoxAttack = transform.GetChild(0).gameObject; //Obtengo la hitbox de ataque
         hitBoxAttack.SetActive(false); //Desactivo la hitbox de ataque
 
 
@@ -87,7 +88,7 @@ public class EnemyHandler : MonoBehaviour
        
         timerAttack += Time.deltaTime; //Activo el timer
         if(moveWithWayPoints){//Si la lista de waypoints no esta vacia y se decidio moverse por wayPoints:
-            // wayPointsMove();//me muevo por waypoints
+            wayPointsMove();//me muevo por waypoints
         }
         Ears();//Funcion para escuchar cuando el jugador este cerca
         Follow();//Funcion para seguir al jugador
