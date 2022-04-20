@@ -4,9 +4,16 @@ using UnityEngine;
 
 public class ProjectileScript : MonoBehaviour
 {
+    protected Rigidbody rb;
+
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
     protected void Movement(float Speed)
     {
-        transform.Translate(Vector3.forward * Speed * Time.deltaTime);
+        // transform.Translate(Vector3.forward * Speed * Time.deltaTime);
+        rb.MovePosition(transform.localPosition + transform.forward * Speed * Time.deltaTime);
     }
     protected void OnImpact(GameObject _object, LayerMask mask, float despawnTime = 5f, float scaleMult = 1f)  // la deteccion con onCollision funciona mucho mejor que con onTrigger, pero igualmente se siguen perdiendo un par de balas por algun motivo, supongo que la deteccion de colisiones de los rigidbody no es perfecta.
     {

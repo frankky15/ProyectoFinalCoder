@@ -12,14 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d760eb16629f3744b9a707e5ef148b3, type: 3}
   m_Name: GreenSpider
   m_EditorClassIdentifier: 
-  damage: 50
-  speed: 5
-  runSpeed: 7
-  keepDistance: 4
+  points: 10
+  multiplierPoints: 1
+  health: 60
+  multiplierHealth: 1
+  damage: 20
+  multiplierDamage: 0.5
+  speed: 3
+  runSpeed: 6
+  keepDistance: 2
   waitAttack: 1
   waitTimeDead: 2
   timeToSetAttack: 0.3
   timeToQuitAttack: 0.5
-  hearRange: 20
-  hearRunRange: 30
+  visionRange: 60
+  multiplierVisionRange: 1
+  hearRange: 5
+  visionOnWallRange: 0.5
   followRange: 100
+  multiplierFollowRange: 1
+  waitNewDirection: 2

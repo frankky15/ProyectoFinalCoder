@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0128c312ff7db774b8fd4b2e8d01866d, type: 3}
+  m_Name: SpiderAudio
+  m_EditorClassIdentifier: 
+  audio0: {fileID: 8300000, guid: d96aff00adea74a4588ae96ceb72b593, type: 3}
+  audioVol0: 1
+  audio1: {fileID: 8300000, guid: 05fada6863435164297973bf1fc0185a, type: 3}
+  audioVol1: 1
+  audio2: {fileID: 8300000, guid: d96aff00adea74a4588ae96ceb72b593, type: 3}
+  audioVol2: 1
+  audio3: {fileID: 8300000, guid: dc7dfd643c9d5b1449d67303784d78a6, type: 3}
+  audioVol3: 0.701
+  audio4: {fileID: 8300000, guid: 925b5c3149b792d49bfa6972a1728b36, type: 3}
+  audioVol4: 0.789
+  audio5: {fileID: 0}
+  audioVol5: 1
+  audio6: {fileID: 0}
+  audioVol6: 1
+  audio7: {fileID: 0}
+  audioVol7: 1
+  audio8: {fileID: 0}
+  audioVol8: 1
+  audio9: {fileID: 0}
+  audioVol9: 1

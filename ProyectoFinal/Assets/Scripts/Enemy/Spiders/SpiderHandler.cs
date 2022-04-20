@@ -2,30 +2,51 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpiderHandler : EnemyHandler
+public class SpiderHandler : MeleEnemyHandler
 {
-    private RaycastHit hit; //Variable para el raycast al moverse
-    private Vector3 rayCastDirection; //Direccion del rayo
-    private AnimationsController animator; //Script que activa las animaciones
-    public float damage { get; private set;}
+    [SerializeField] float timeOnFire = 1f;
+    [SerializeField] float damagePerFire = 2f;
+
+  
+
+    private float timerOnFire = 0;
+    private bool isOnFire = false;
+
+    private bool moving;
+
+    private Vector3 lastPosition;
+    private AnimationsController animatorController; //Script que activa las animaciones
+    //public float damage { get; private set;}
 
     private void Awake() {
-        damage = vars.damage;
+        //damage = vars.damage;
     }
     protected override void Start(){
+        animatorController = GetComponent<AnimationsController>(); //Obtengo las animaciones
         base.Start();
-        animator = GetComponent<AnimationsController>(); //Obtengo las animaciones
     }
 
     protected override void Update() {
         base.Update();
         SetAnimations();
+        if(isOnFire){
+            timerOnFire += Time.deltaTime;
+            health -= damagePerFire;
+        }
+        if(timerOnFire >= timeOnFire){
+            isOnFire = false;
+            timerOnFire = 0;
+        }
+                if (lastPosition.x != gameObject.transform.position.x | lastPosition.z != gameObject.transform.position.z)
+        {
+            lastPosition = gameObject.transform.position;
+            moving = true;
+        }
+        else moving = false;
     }
 
-   protected override void Follow(){
+   /*protected override void Follow(){
        base.Follow();
-        Debug.DrawRay(transform.position,rayCastDirection,Color.red); //Se muestra en el editor un raycast
-        rayCastDirection = player.transform.position - transform.position;
         if(isFollowing && !isDeath){
             if(Physics.Raycast(transform.position,rayCastDirection,out hit, vars.followRange,layersDetect)){//Creo el rayo
                 if(hit.collider != null){ //Si el rayo golpea algo:
@@ -48,22 +69,31 @@ public class SpiderHandler : EnemyHandler
                 }
             }
         }
-    }
+    }*/
 
-    private void SetAnimations(){
+    protected virtual void SetAnimations(){ 
         if(health <= 0){
-            animator.SetDead(); //Activo la animacion de muerte
+            animatorController.SetDead(); //Activo la animacion de muerte
         }
-        if(moveWithWayPoints || isFollowing){
-            animator._animateWhenRun = true; //Activo la animacion de moverse
+        if(randomMove || isFollowing){
+            animatorController._animateWhenRun = true; //Activo la animacion de moverse
         }
         if(canAttack){
-            animator._animateWhenRun = false; //Cancelo la animacion de correr de la araña
-            animator.Attack(); //Llamo a la funcion de animacion de ataque en el script de animacion
+            animatorController._animateWhenRun = false; //Cancelo la animacion de correr de la araña
+            animatorController.Attack(); //Llamo a la funcion de animacion de ataque en el script de animacion
         }
         if(isHurt){
-            animator.Hit(); //Hace una animacion para recibir el daño
+            animatorController.Hit(); //Hace una animacion para recibir el daño
             isHurt = false;
         }
     }
+    public virtual void OnFire(){
+        isOnFire = true;
+    }
+    protected override void OnTriggerEnter(Collider other)
+    {
+        base.OnTriggerEnter(other);
+    }
+
+    
 }

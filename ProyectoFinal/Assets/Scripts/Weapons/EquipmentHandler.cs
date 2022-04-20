@@ -11,11 +11,12 @@ public class EquipmentHandler : MonoBehaviour
     [SerializeField] private Transform weaponParent; // El parent donde se va a instanciar el modelo del arma.
     [SerializeField] private Transform hitscanTransform;
     [SerializeField] private LayerMask aimColliderMask;
-    [SerializeField] private GameObject bulletHole;
+    [SerializeField] private LayerMask enemyColliderMask;
     private GameObject currentWeapon; // El arma en uso.
     private int currentIndex; // El index del WeaponScriptableObject en uso.
     private Transform cameraCenter;
     private RaycastHit hitscanRaycast;
+    private float Magazine;
     private float fireCooldown;
     private float pulloutCooldown; // Un cooldown para cuando sacas el arma y podes empezar a disparar.
 
@@ -26,6 +27,7 @@ public class EquipmentHandler : MonoBehaviour
     private float floatPlaceHolder1;
     private bool boolPlaceHolder0;
     private bool boolPlaceHolder1;
+    private Animator WeaponAnimator;
     public bool isShooting {get; private set;}
 
     #endregion
@@ -33,15 +35,7 @@ public class EquipmentHandler : MonoBehaviour
     #region Unity Calls
     private void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        Instance = this;
 
         cameraCenter = transform.Find("Look Pivot/Main Camera");
     }
@@ -68,11 +62,12 @@ public class EquipmentHandler : MonoBehaviour
         // *Inputs* //
         if (Input.GetKeyDown(KeyCode.Alpha1)) equipWeapon(0); // Para agregar mas slots simplemente agregar una linea con una nueva tecla y un nuevo index en equipWeapon(index).
         if (Input.GetKeyDown(KeyCode.Alpha2)) equipWeapon(1);
-        if (Input.GetKeyDown(KeyCode.Alpha3)) equipWeapon(2);
 
         // *Weapon Behaviour* //
         if (currentWeapon != null && (loadout[currentIndex].name == "Staff")) Staff(); // Si el arma en uso se llama "staff" utilizar el siguiente metodo de comportamiento.
         if (currentWeapon != null && (loadout[currentIndex].name == "PyroHand")) Pyronamcer();
+        if (currentWeapon != null && (loadout[currentIndex].name == "Shotgun")) Shotgun();
+        if (currentWeapon != null && (loadout[currentIndex].name == "Revolver")) Revolver();
     }
     private void equipWeapon(int _index)
     {
@@ -92,10 +87,13 @@ public class EquipmentHandler : MonoBehaviour
             // placeholders to default //
             boolPlaceHolder0 = false;
             boolPlaceHolder1 = false;
-            floatPlaceHolder0 = 0;
             floatPlaceHolder1 = 0;
             gObjPlaceHolder0 = null;
             gObjPlaceHolder1 = null;
+            Magazine = 0;
+
+            WeaponAnimator = currentWeapon.GetComponentInChildren<Animator>();
+            // Debug.Log(WeaponAnimator);
         }
     }
 
@@ -120,7 +118,7 @@ public class EquipmentHandler : MonoBehaviour
         }
         if (Input.GetMouseButton(0) && fireCooldown < Time.time && pulloutCooldown < Time.time && boolPlaceHolder0) // tuve que poner la condicion de null porque aveces en el primer frame no tiene la referencia del gObj..
         {
-            floatPlaceHolder0 = Mathf.Clamp((floatPlaceHolder0 += (loadout[currentIndex].p_castTime / loadout[currentIndex].prefab.transform.localScale.y) * Time.deltaTime),
+            Magazine = Mathf.Clamp((Magazine += (loadout[currentIndex].p_castTime / loadout[currentIndex].prefab.transform.localScale.y) * Time.deltaTime),
             loadout[currentIndex].p_projectileMinSize / loadout[currentIndex].prefab.transform.localScale.y,
             loadout[currentIndex].p_projectileMaxSize / loadout[currentIndex].prefab.transform.localScale.y); // tengo que dividirlo para compenzar la escala global.
         }
@@ -132,7 +130,7 @@ public class EquipmentHandler : MonoBehaviour
 
             GameObject newProjectile = Instantiate(loadout[currentIndex].p_projectile, gObjPlaceHolder0.transform.position, Quaternion.LookRotation(aimDir, Vector3.up)) as GameObject;
             newProjectile.transform.localScale = gObjPlaceHolder0.transform.lossyScale;
-            floatPlaceHolder0 = loadout[currentIndex].p_projectileMinSize / loadout[currentIndex].prefab.transform.localScale.y; // le asigno el valor de tamaño del dummy al proyectil.
+            Magazine = loadout[currentIndex].p_projectileMinSize / loadout[currentIndex].prefab.transform.localScale.y; // le asigno el valor de tamaño del dummy al proyectil.
             Destroy(newProjectile, 6f);
 
             fireCooldown = loadout[currentIndex].p_fireRate + Time.time;
@@ -140,7 +138,7 @@ public class EquipmentHandler : MonoBehaviour
             boolPlaceHolder0 = false;
             isShooting = false;
         }
-        if (gObjPlaceHolder0 != null) gObjPlaceHolder0.transform.localScale = new Vector3(floatPlaceHolder0, floatPlaceHolder0, floatPlaceHolder0);
+        if (gObjPlaceHolder0 != null) gObjPlaceHolder0.transform.localScale = new Vector3(Magazine, Magazine, Magazine);
 
         // Secondary //
 
@@ -186,5 +184,105 @@ public class EquipmentHandler : MonoBehaviour
             isShooting = false;
         }
     }
+    // ? Hunter Class ? //
+    private void Shotgun()
+    {
+        if (pulloutCooldown > Time.time)
+        {
+            Magazine = loadout[currentIndex].p_magAmount; // la cantidad de cartuchos..
+            // WeaponAnimator.Rebind();
+        }
+        if (Input.GetMouseButtonDown(0) && fireCooldown < Time.time && pulloutCooldown < Time.time && Magazine > 0)
+        {
+            FireShotgun();
+            if (Magazine > 0) fireCooldown = loadout[currentIndex].p_fireRate + Time.time;
+            else 
+            {
+                fireCooldown = loadout[currentIndex].p_reloadTime + Time.time;
+                Magazine = loadout[currentIndex].p_magAmount;
+                WeaponAnimator.SetTrigger("ShootAgain");
+                WeaponAnimator.SetTrigger("Reload");
+            }
+        }
+        if (Input.GetMouseButtonDown(1) && fireCooldown < Time.time && pulloutCooldown < Time.time && Magazine == loadout[currentIndex].p_magAmount)
+        {
+            for (int i = 0; i < loadout[currentIndex].p_magAmount; i++) FireShotgun();
+            fireCooldown = loadout[currentIndex].p_reloadTime + Time.time;
+            Magazine = loadout[currentIndex].p_magAmount;
+            WeaponAnimator.SetTrigger("Reload");
+        }
+    }
+    private void FireShotgun()
+    {
+        Magazine--;
+
+        RaycastHit pelletHit;
+
+        for (int i = 0; i < loadout[currentIndex].p_pelletAmount; i++)
+        {
+            // * dispersion
+            Vector3 spread = cameraCenter.transform.position + cameraCenter.transform.forward * 1000f;
+            {
+            spread += Random.Range(-loadout[currentIndex].p_spread, loadout[currentIndex].p_spread) * transform.right;
+            spread += Random.Range(-loadout[currentIndex].p_spread, loadout[currentIndex].p_spread) * transform.up;
+            }
+            spread -= cameraCenter.transform.position;
+            spread.Normalize();
+            // * aplico un raycast con la info de dispersion
+            if (Physics.Raycast(cameraCenter.transform.position, spread, out pelletHit, 999f, enemyColliderMask))
+            {
+                GameObject pelletHole = Instantiate(loadout[currentIndex].s_projectile, pelletHit.point, Quaternion.LookRotation(pelletHit.normal)) as GameObject;
+                Destroy(pelletHole, 2f);
+            }
+            else if (Physics.Raycast(cameraCenter.transform.position, spread, out pelletHit, 999f, aimColliderMask))
+            {
+                GameObject pelletHole = Instantiate(loadout[currentIndex].p_projectile, pelletHit.point, Quaternion.LookRotation(pelletHit.normal)) as GameObject;
+                Destroy(pelletHole, 2f);
+            }
+        }
+        WeaponAnimator.Play("ShotgunShot");
+    }
+
+    private void Revolver()
+    {
+        if (pulloutCooldown > Time.time)
+        {
+            Magazine = loadout[currentIndex].p_magAmount;
+            // WeaponAnimator.Rebind();
+        }
+        if (Input.GetMouseButtonDown(0) && fireCooldown < Time.time && pulloutCooldown < Time.time && Magazine > 0)
+        {
+            Magazine--;
+            FireRevolver();
+
+            if (Magazine > 0) 
+            {
+                fireCooldown = loadout[currentIndex].p_fireRate + Time.time;
+            }
+            else 
+            {
+                fireCooldown = loadout[currentIndex].p_reloadTime + Time.time;
+                Magazine = loadout[currentIndex].p_magAmount;
+                WeaponAnimator.SetTrigger("Reload");
+            }
+        }
+    }
+    private void FireRevolver()
+    {
+        RaycastHit bulletHit;
+
+        if (Physics.Raycast(cameraCenter.transform.position, cameraCenter.transform.forward, out bulletHit, 999f, enemyColliderMask))
+        {
+            GameObject bulletHole = Instantiate(loadout[currentIndex].s_projectile, bulletHit.point, Quaternion.LookRotation(bulletHit.normal)) as GameObject;
+            Destroy(bulletHole, 2f);
+        }
+        else if (Physics.Raycast(cameraCenter.transform.position, cameraCenter.transform.forward, out bulletHit, 999f, aimColliderMask))
+        {
+            GameObject bulletHole = Instantiate(loadout[currentIndex].p_projectile, bulletHit.point, Quaternion.LookRotation(bulletHit.normal)) as GameObject;
+            Destroy(bulletHole, 2f);
+        }
+        WeaponAnimator.SetTrigger("Shoot");
+    }
+
     #endregion
 }

@@ -31,7 +31,7 @@ public class AnimationsController : MonoBehaviour
                 _animator.SetBool(MovingHash, true);
                 var dirrection = position - _lastPosition;
                 dirrection.y = 0;
-                _lastRotation = Quaternion.LookRotation(dirrection);
+                //_lastRotation = Quaternion.LookRotation(dirrection);
             }
             else
             {

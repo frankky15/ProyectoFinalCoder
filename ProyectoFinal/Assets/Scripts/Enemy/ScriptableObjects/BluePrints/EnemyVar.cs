@@ -6,8 +6,11 @@ using UnityEngine;
 public class EnemyVar : ScriptableObject
 {
     public int points = 10;
-
+    [SerializeField] private int multiplierPoints = 1;
+    public float health = 60;
+    [SerializeField] float multiplierHealth = 1f;
     public float damage = 50f; //Daño de la araña
+    [SerializeField] float multiplierDamage =1f;
     public float speed = 5f; //Variable de velocidad
     public float runSpeed = 7f; //Variable de velocidad al correr
     public float keepDistance = 2f; //Variable para no pegarse al jugador
@@ -16,7 +19,22 @@ public class EnemyVar : ScriptableObject
     public float timeToSetAttack = 0.3f; //Variable para cuanto tiempo de empezada la animacion de ataque, activar el ataque
     public float timeToQuitAttack = 0.5f; //Variable para pasado de un tiempo sacar el ataque
 
-    public float hearRange = 20f; //Rango para escuchar al jugador cuando este cerca
-    public float hearRunRange = 30f; //Rango mas grande para escuchar al jugador correr
-    public float followRange = 100f;//Rango hasta cuanto va a seguir al jugador
+    public float visionRange = 50f;
+    [SerializeField] float multiplierVisionRange = 1f;
+    public float hearRange = 5f;
+    public float visionOnWallRange = 3f;//Variable para saber a que distancia de una pared cambia su direccion
+    public float followRange = 30f;//Rango hasta cuanto va a seguir al jugador
+    [SerializeField] float multiplierFollowRange = 1f;
+
+    public float waitNewDirection = 0.9f;
+
+    private int score = 0;
+    private void Start() {
+        score = PlayerPrefs.GetInt("score", 0);
+        points += score*multiplierPoints;
+        health += score*multiplierHealth;
+        damage += score*multiplierDamage;
+        followRange += score*multiplierFollowRange;
+        visionRange += score*multiplierFollowRange;
+    }
 }

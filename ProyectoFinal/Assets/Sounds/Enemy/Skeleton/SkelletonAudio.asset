@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0128c312ff7db774b8fd4b2e8d01866d, type: 3}
+  m_Name: SkelletonAudio
+  m_EditorClassIdentifier: 
+  audio0: {fileID: 8300000, guid: 4b4327d6ad114074b952371a89399800, type: 3}
+  audioVol0: 0.701
+  audio1: {fileID: 8300000, guid: b22ec6d56d19f484998cd486cc665759, type: 3}
+  audioVol1: 1
+  audio2: {fileID: 8300000, guid: b8b1b1e546e7330489166fbb02d5d203, type: 3}
+  audioVol2: 1
+  audio3: {fileID: 8300000, guid: e037fea95c8589c459d0dd53bf973a2b, type: 3}
+  audioVol3: 1
+  audio4: {fileID: 0}
+  audioVol4: 1
+  audio5: {fileID: 0}
+  audioVol5: 1
+  audio6: {fileID: 0}
+  audioVol6: 1
+  audio7: {fileID: 0}
+  audioVol7: 1
+  audio8: {fileID: 0}
+  audioVol8: 1
+  audio9: {fileID: 0}
+  audioVol9: 1

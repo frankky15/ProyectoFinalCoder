@@ -4,22 +4,15 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-    public static PauseMenu Instance;
+    // public static PauseMenu Instance;
     private bool menuToggle;
-    private GameObject menu;
+    [SerializeField] private GameObject menu;
+
     private void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-        menu = GameObject.Find("Menu");
+        // Instance = this;
     }
+
     private void Update()
     {
         menuToggle = GameManager.Instance.gameIsPaused;
@@ -29,8 +22,18 @@ public class PauseMenu : MonoBehaviour
     {
         menuToggle = state;
     }
-    public void ReturnToMenu()
+    public void QuitGame()
     {
-        SceneManager.LoadScene("MainMenu");
+        Application.Quit();
+    }
+
+    public void LoadLevel(int index)
+    {
+        LoadingScreenScript.Instance.LoadLevel(index);
+    }
+
+    public void ResumeTime()
+    {
+        Time.timeScale = GameManager.Instance.defaultTimescale;
     }
 }

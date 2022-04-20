@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1e103ff261f62b4bbce1b9113a91512, type: 3}
+  m_Name: Revolver
+  m_EditorClassIdentifier: 
+  weaponName: Revolver
+  prefab: {fileID: 6051992550891804329, guid: 7a96c90cba97ffd43a90bfeb201a57f5, type: 3}
+  p_projectile: {fileID: 2902646461905928118, guid: 549e08dffa00c3b47ad61f99ac8c3477, type: 3}
+  p_flashEffect: {fileID: 0}
+  p_castTime: 0
+  p_fireRate: 0.4
+  p_magAmount: 6
+  p_pelletAmount: 0
+  p_spread: 0
+  p_reloadTime: 3
+  p_projectileMinSize: 0
+  p_projectileMaxSize: 0
+  p_lifeTime: 0
+  s_projectile: {fileID: 2902646461905928118, guid: c3e2eb0dc10207741b841bd994acc1a3, type: 3}
+  s_flashEffect: {fileID: 0}
+  s_castTime: 0
+  s_fireRate: 0
+  s_magAmount: 0
+  s_pelletAmount: 0
+  s_spread: 0
+  s_reloadTime: 0
+  s_projectileMinSize: 0
+  s_projectileMaxSize: 0
+  s_lifeTime: 0
+  flashTime: 0.1
+  pulloutTime: 0.5
