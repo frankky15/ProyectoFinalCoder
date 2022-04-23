@@ -5,15 +5,13 @@ using UnityEngine;
 public class SpiderRed : SpiderHandler
 {
     [SerializeField] float waitCalm = 2f;
-    [SerializeField] float poisonTimeEffect = 10f;
-    [SerializeField] float poisonDamage = 1f;
     private float timerOnAngry = 0;
     private bool isAngry = false;
     
     protected override void Update() {
         if(isAngry){
             timerOnAngry += Time.deltaTime;
-            BetterFollow();
+           // BetterFollow();
             BetterAttack();
             if(timerOnAngry >= waitCalm){
                 isAngry = false;
@@ -28,18 +26,16 @@ public class SpiderRed : SpiderHandler
             isAngry = true;
         }
     }
-    private void BetterFollow(){
+    /*private void BetterFollow(){
         //Debug.Log(Vector3.Distance(transform.position,player.transform.position));
         if(isFollowing && !isDeath){//Si se esta persiguiendo al jugador:
             Vector3 relativePos = player.transform.position - transform.position;
             Quaternion rotation = Quaternion.LookRotation(relativePos);
             randomMove = false;//Dejo de moverme con wayPoints
-            transform.position = Vector3.MoveTowards(transform.position, player.transform.position, (vars.runSpeed*2) * Time.deltaTime); //Sigo al objetivo
             if(Physics.Raycast(transform.position,rayCastDirection,out hit, vars.followRange,layersDetect)){//Creo el rayo
                 if(hit.collider != null){ //Si el rayo golpea algo:
                     if(hit.transform.tag == player.transform.tag){ //Si el objeto golpeado tiene el mismo tag que el jugador:
-                        transform.position = Vector3.MoveTowards(transform.position, player.transform.position, vars.runSpeed*2 * Time.deltaTime); //Sigo al objetivo
-                        Quaternion newRotation = Quaternion.LookRotation(player.transform.position - transform.position);//Creo una rotacion segun la posicion entre el jugador
+                        rigidbody.MovePosition(transform.position + transform.forward * Time.deltaTime * vars.speed);                        Quaternion newRotation = Quaternion.LookRotation(player.transform.position - transform.position);//Creo una rotacion segun la posicion entre el jugador
                         transform.rotation = newRotation;//le asigno la nueva rotacion a mi rotacion
                     } 
                     else{//Si no
@@ -64,7 +60,7 @@ public class SpiderRed : SpiderHandler
                 timerAttack = 0; //Reinicio el timer
             }
         }
-    }
+    }*/
     private void BetterAttack(){
         if(canAttack){   //Si puede atacar:
             if(timerAttack >= vars.timeToSetAttack/2){ //Si el timer es mayor o igual al tiempo para poner el ataque:
@@ -81,7 +77,7 @@ public class SpiderRed : SpiderHandler
     {
         base.OnTriggerEnter(other);
         if(other.CompareTag("Player")){
-            player.GetComponent<PlayerHandler>().OnPoisoned(poisonTimeEffect,poisonDamage);
+            player.GetComponent<PlayerHandler>().OnPoisoned(vars.timeEffect,vars.effectInstensity);
         }
     }
 }

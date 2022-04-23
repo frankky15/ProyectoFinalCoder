@@ -5710,7 +5710,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2967281810770741370, guid: 737fd79cfe075b74d9b9de7cd7606559, type: 3}
       propertyPath: probabilitySpawn.Array.data[0]
-      value: 30
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2967281810770741370, guid: 737fd79cfe075b74d9b9de7cd7606559, type: 3}
       propertyPath: probabilitySpawn.Array.data[1]
@@ -5730,7 +5730,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5790515591280482306, guid: 737fd79cfe075b74d9b9de7cd7606559, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5790515591280482306, guid: 737fd79cfe075b74d9b9de7cd7606559, type: 3}
       propertyPath: m_LocalPosition.z
@@ -7681,15 +7681,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2967281810770741370, guid: 737fd79cfe075b74d9b9de7cd7606559, type: 3}
       propertyPath: probabilitySpawn.Array.data[0]
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2967281810770741370, guid: 737fd79cfe075b74d9b9de7cd7606559, type: 3}
       propertyPath: probabilitySpawn.Array.data[1]
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2967281810770741370, guid: 737fd79cfe075b74d9b9de7cd7606559, type: 3}
       propertyPath: probabilitySpawn.Array.data[2]
-      value: 5
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5790515591280482306, guid: 737fd79cfe075b74d9b9de7cd7606559, type: 3}
       propertyPath: m_RootOrder
@@ -7701,7 +7701,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5790515591280482306, guid: 737fd79cfe075b74d9b9de7cd7606559, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5790515591280482306, guid: 737fd79cfe075b74d9b9de7cd7606559, type: 3}
       propertyPath: m_LocalPosition.z

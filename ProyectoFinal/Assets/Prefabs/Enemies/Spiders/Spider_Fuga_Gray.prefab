@@ -778,10 +778,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 1.3168164
-  m_Height: 2.6336331
+  m_Radius: 1.5210755
+  m_Height: 3.042151
   m_Direction: 1
-  m_Center: {x: 0.1046519, y: 0.99410325, z: -0.023874342}
+  m_Center: {x: 0.104651846, y: 0.7618751, z: 0.1803853}
 --- !u!114 &4167199545209703191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -808,16 +808,13 @@ MonoBehaviour:
   waitRotate: 1
   waitMove: 0
   staffPrimaryDamageMult: 0
-  playerDetected: 0
-  isFollowing: 0
-  footstepInterval: 0.1
+  enemyWalks: 1
+  footstepInterval: 0.2
   playAudio: {fileID: 2304370535852485709}
-  player: {fileID: 0}
+  moving: 0
   timeOnFire: 1
   damagePerFire: 2
   jumpOnImpressed: 3
-  slowTimeEffect: 4
-  slowIntensity: 4
 --- !u!82 &5357878069276143727
 AudioSource:
   m_ObjectHideFlags: 0
@@ -827,7 +824,7 @@ AudioSource:
   m_GameObject: {fileID: 4647986043587213897}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: c4b530bdf4fb71a499d25fd5f0f939bd, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -839,7 +836,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 1.01
+  MaxDistance: 100
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0

@@ -18,6 +18,7 @@ public class LoadingScreenScript : MonoBehaviour
 
     public void LoadLevel(int sceneIndex)
     {
+        PlayerPrefs.Save();
         StartCoroutine(LoadAsynchronously(sceneIndex));
         // Debug.Log("llamada recivida desde LoadLevel()");
     }

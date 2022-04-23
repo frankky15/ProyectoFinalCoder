@@ -115,6 +115,7 @@ public class EquipmentHandler : MonoBehaviour
             
             boolPlaceHolder0 = true; // condicional para que el siguiente if no se ejecute sin el primero.
             isShooting = true;
+            // WeaponAnimator.SetBool("Charge", true);
         }
         if (Input.GetMouseButton(0) && fireCooldown < Time.time && pulloutCooldown < Time.time && boolPlaceHolder0) // tuve que poner la condicion de null porque aveces en el primer frame no tiene la referencia del gObj..
         {
@@ -124,6 +125,10 @@ public class EquipmentHandler : MonoBehaviour
         }
         if (Input.GetMouseButtonUp(0) && fireCooldown < Time.time && pulloutCooldown < Time.time && boolPlaceHolder0)
         {
+            // WeaponAnimator.SetTrigger("ShootPrimary");
+
+            // WeaponAnimator.SetBool("Charge", false);
+
             gObjPlaceHolder0.SetActive(false);
 
             Vector3 aimDir = (hitscanTransform.position - gObjPlaceHolder0.transform.position).normalized;
@@ -178,6 +183,7 @@ public class EquipmentHandler : MonoBehaviour
             Destroy(newProjectile, 2f);
             fireCooldown = loadout[currentIndex].p_fireRate + Time.time;
             isShooting = true;
+            WeaponAnimator.SetTrigger("Shoot");
         }
         if (Input.GetMouseButtonUp(0))
         {

@@ -1,39 +1,57 @@
-Comentarios al tutor:
-El juego que queremos hacer es una especie de hexen, pero actualizado, porque el original es injugable...
-Si no conoces el hexen, es un juego viejo al estilo doom/wolfestein/dukenukem/quake pero que estaba centrado en la magia y tenia diferentes
-aspectos de rpg como por ejemplo las clases que es lo que queremos adoptar en este juego..
-De esta forma podrias elegir ser un gerrero, un hechicero y subclases como hechicero piromantico, electrico, etc...
-Tambien nos gustaria tener un sistema de leveling en el juego... pensabamos en un arbol de habilidades pero sabemos que eso no va a pasar..
-Pero si nos gustaria que en cada nivel tengamos la posibilidad de encontrar "tokens de leveleo" ya sea explorando o matando enemigos y que
-despues se puedan usar para mejorar un aspecto del personaje, como la vida, el multiplicador de daño, velocidad, etc...
+Comentarios al Profesor:
 
-La escena inicial consiste de una sala de comentarios y un campo de tiro donde se pueden probar las armas. también se puede encontrar 
-un portal que te lleva a la escena principal.
-La escena principal no la hicimos nosotros (escena del asset pack "LowPoly Nature Forest") por falta de tiempo, simplemente fue modificada para 
-representar vagamente la estética que queremos lograr en el juego final..
-En ella se pueden encontrar varias estructuras como una pequeña mazmorra y un campamento, así como varios tipos de enemigos.
+El juego es muy sensillo.. simplemente, interactuas con el arcade, elegis clase, y se genera una dungeon de forma procedural..
+Como objetivo del juego, es un arcade, la idea es hacer un highscore.. para ganar score tenes que avanzar en la dungeon, ya sea matando a una cantidad de
+enemigos o encontrando una escotilla...
 
-Planeamos reescribir todo lo que respecta a las armas, pero manteniendo el mismo comportamiento, para facilitar la lectura y simples del código,
-para facilitar el intercambio de información entre scripts y el intercambio de armas ingame en un futuro. (un sistema de slots)
+A futuro planeamos tener diferentes generaciones de dungeon, como por ejemplo una cueva, o una torre... y que de forma aleatoria te toque un nivel u otro al avanzar..
+Tambien queremos agregar armas, clases, enemigos..
+Trabajar en las animaciones, los sonidos, en el PP.. y posiblemente mudar el juego de URP a HDRP.
 
-Con respecto a las armas, hay dos armas que se cambian con los numeros, el staff (con numero 1) y el Shotgun Sword (con numero 2), ambas 
-funcionan con hitscan,y tienen una correccion de angulo para que los proyectiles siempre den con el objetivo... cada una tiene dos comportamientos,
-el staff con click izquierdo realiza su ataque principal que es un ataque de mantener para cargar, a mayor tamaño mas daño pero mas lento va el proyectil..
-con click izquierdo se realiza su ataque secundario que es un hitscan automatico..
-La Shotgun Sword es una espada, pero su ataque principal no esta implementado porque lleva una animacion, y su ataque secundario, con click derecho
-es una escopeta..
--- Las armas no se encuentran balanceadas...
+Nuestra meta es mantener el juego sensillo y adictivo, como los arcades de antes..
+Las fuentes de inspiraciones mas grandes del juego fueron el hexen (para las armas) y el binding of issac (para el modo de juego).
 
--- Falta una pantalla de carga para el cambio entre escenas.
 
--- Falta terminar el UI, hasta ahora solamente tiene el crosshair.
+------------------------------------------------------------
 
--- El enemigo activa una hitbox para hacer daño pero no esta bien implementada por ahora, y no tuvimos tiempo para solucionarlo asi que si bien el
-player tiene la funcion de morir, no puede hacerlo...
+Como funciona la generacion de las dungeons..
 
-Para facilitar la jugabilidad durante la edicion puse un en el script de GameManager que con la tecla escape se active/desactive el puntero del mouse.
+de forma sensilla:
+tenemos un sistema de celdas (un pasillo o una habitacion se considera una celda).
+al iniciar la generacion lo primero que se instancia es una habitacion principal de donde donde hay 3 posibles lugares donde se puede posicionar una celda 
+(a esto lo llamo temp portals).
+se instancia una celda en la posicion  0,0,0..
+se usa un physicscheck con las dimenciones de la celda en cada posicion de los temp portal para verificar que la celda no se encuentra superpuesta con otra.
+si pasa el check la celda se queda en ese lugar.. si no lo pasa se mueve a otro temp portal.. si se genera una dungeon donde por x motivo es imposible intanciar
+una nueva celda, a los 10 segundos se genera nuevamente.. 
+despues de tener todas las celdas colocadas se reemplazan los temp portals que quedaron sin celda y se les coloca una pared.
+en promedio tarda unos 6 segundos en generar una dungeon de 100 celdas (se puede modificar la cantidad)..
 
-====Packages====
-++ Universal RP V10.8.1
-++ Cinemachine V2.6.11
-++ 2D Sprite 1.0.0
+deje todo comentado el script de DungeonManager espero que se entienda porque soy bastante malo explicando, y mas malo comentando scripts (castro franco)...
+si queres ver las celdas estan en assets/prefabs/dungeongen.. ahi hay una carpeta de rooms y de hallways (las celdas).. cada una tiene un script "cell.cs"
+que lo unico que hace es serializar los temp portals y asegurarse de que tenga un box collider...
+
+a futuro me gustaria mejorar el script para tener en cuenta las formas irregulares de las celdas, para optimizar la generacion y disminuir bugs.
+------------------------------------------------------------
+    Los enemigos se instancian una vez terminado de generar la dungeon, en distintas celdas, en puntos especificos de spawns,
+los cuales cada uno tienen una probabilidad de generar un enemigo, tiene un array de Game Objects para los enemigos que 
+pueden spawnear, y un array para la probabilidad de spawn cada enemigo. Al instanciarse cada enemigo, se mueven como hijos
+de Enemy Container.
+Luego de un tiempo se asignan todos los hijos de Enemy Container a Enemy Count en enemies left, cuando se mate a cierta cantidad
+se sumara un punto y se volvera a generar la dungeon
+
+Siento que deje bastantes cosas comentadas que luego se podrian implementar mejor, y si bien no comente todo
+al menos creo que los scripts que hice se entienden (Martin Tannenbaum)
+------------------------------------------------------------
+Problemas que tenemos con la build actual..
+
+1. por algun motivo que todavia no descubro, el slider de sensibilidad en el editor despues de cambiar/cerrar la escena de la dungeon siempre se pasa a 10.. 
+Lo mas extraño es que en la build es mas raro todavia.. el slider de sensibilidad funciona bien en la build por algun motivo, pero el de volumen, que en el
+modo play del editor funciona bien aca se resetea a 0 cada vez que cambias de escena...
+
+2. el sonido del staff (primer arma del mago) se bugeaba mucho con animaciones, asi que estoy viendo de ponerlo de otra forma, por lo menos provisorio, 
+asi que de momento no tiene sonido.
+
+3. En algunas ocaciones los enemigos caen al vacio al instanciarse.
+
+4. En la build los proyectiles van a otra velocidad por algun motivo.

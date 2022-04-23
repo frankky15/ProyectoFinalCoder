@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d760eb16629f3744b9a707e5ef148b3, type: 3}
   m_Name: Eyebats
   m_EditorClassIdentifier: 
-  points: 10
-  multiplierPoints: 1
   health: 60
   multiplierHealth: 1
+  maxHealth: 900
   damage: 20
-  multiplierDamage: 1
+  multiplierDamage: 2
+  maxDamage: 100
   speed: 4
   runSpeed: 7
   keepDistance: 2
@@ -32,3 +32,11 @@ MonoBehaviour:
   followRange: 30
   multiplierFollowRange: 1
   waitNewDirection: 2
+  revolverDamage: 60
+  shotgunDamage: 200
+  timeEffect: 0
+  timeEffectMultiplier: 0
+  maxEffectTime: 10
+  effectInstensity: 0
+  effectIntensityMultiplier: 0
+  maxEffectIntensity: 5

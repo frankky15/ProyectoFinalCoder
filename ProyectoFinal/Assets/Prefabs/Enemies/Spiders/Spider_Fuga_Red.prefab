@@ -4985,8 +4985,8 @@ Transform:
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_Children:
   - {fileID: 6356906403099780663}
-  - {fileID: 8925295433631816253}
   - {fileID: 4362615274016880354}
+  - {fileID: 8925295433631816253}
   - {fileID: 3535220635575897627}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -5080,16 +5080,13 @@ MonoBehaviour:
   waitRotate: 1
   waitMove: 0
   staffPrimaryDamageMult: 0
-  playerDetected: 0
-  isFollowing: 0
-  footstepInterval: 0.1
+  enemyWalks: 1
+  footstepInterval: 0.2
   playAudio: {fileID: 6477322559004948652}
-  player: {fileID: 0}
+  moving: 0
   timeOnFire: 1
   damagePerFire: 2
   waitCalm: 2
-  poisonTimeEffect: 5
-  poisonDamage: 0.1
 --- !u!82 &8643873021404196006
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5099,7 +5096,7 @@ AudioSource:
   m_GameObject: {fileID: 4051643026621766922}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: c4b530bdf4fb71a499d25fd5f0f939bd, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -5111,7 +5108,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 1.01
+  MaxDistance: 100
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -6218,7 +6215,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4051643026621923626}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5454242703719393904
 GameObject:
@@ -6250,7 +6247,7 @@ Transform:
   - {fileID: 4051643026621923624}
   - {fileID: 4051643026621923616}
   m_Father: {fileID: 4051643026621923626}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7366653029339779017
 GameObject:

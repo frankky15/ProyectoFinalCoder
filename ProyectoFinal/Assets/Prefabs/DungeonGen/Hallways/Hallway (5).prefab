@@ -278,8 +278,12 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2967281810770741370, guid: 737fd79cfe075b74d9b9de7cd7606559, type: 3}
+      propertyPath: probabilitySpawn.Array.data[0]
+      value: 35.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2967281810770741370, guid: 737fd79cfe075b74d9b9de7cd7606559, type: 3}
       propertyPath: probabilitySpawn.Array.data[1]
-      value: 35
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 5790515591280482306, guid: 737fd79cfe075b74d9b9de7cd7606559, type: 3}
       propertyPath: m_RootOrder
@@ -291,11 +295,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5790515591280482306, guid: 737fd79cfe075b74d9b9de7cd7606559, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5790515591280482306, guid: 737fd79cfe075b74d9b9de7cd7606559, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 9
+      value: 6.96
       objectReference: {fileID: 0}
     - target: {fileID: 5790515591280482306, guid: 737fd79cfe075b74d9b9de7cd7606559, type: 3}
       propertyPath: m_LocalRotation.w

@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d760eb16629f3744b9a707e5ef148b3, type: 3}
   m_Name: SkeletonArmored
   m_EditorClassIdentifier: 
-  points: 10
-  multiplierPoints: 1
-  health: 100
-  multiplierHealth: 1
-  damage: 50
-  multiplierDamage: 0.9
+  health: 200
+  multiplierHealth: 2
+  maxHealth: 900
+  damage: 10
+  multiplierDamage: 2
+  maxDamage: 100
   speed: 4
   runSpeed: 6
-  keepDistance: 2
+  keepDistance: 1.8
   waitAttack: 1
   waitTimeDead: 2
   timeToSetAttack: 0.6
@@ -32,3 +32,11 @@ MonoBehaviour:
   followRange: 100
   multiplierFollowRange: 1
   waitNewDirection: 2
+  revolverDamage: 60
+  shotgunDamage: 140
+  timeEffect: 0
+  timeEffectMultiplier: 0
+  maxEffectTime: 10
+  effectInstensity: 0
+  effectIntensityMultiplier: 0
+  maxEffectIntensity: 5

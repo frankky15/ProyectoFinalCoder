@@ -7,50 +7,62 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class EnemyHandler : MonoBehaviour
 {
-    [SerializeField] protected EnemyVar vars;
+    [SerializeField] protected EnemyVar vars; //Scriptable Object con las variables compartidas
 
     [SerializeField] private Transform eyes; //Transform desde el que se va a tirar un rayCast para que detecte al jugador
+    
+//Scriptable Objects para detectar el daño de las armas del mago
     [SerializeField] protected ProjectileScriptableObject pyroPrimary;
     [SerializeField] protected ProjectileScriptableObject staffPrimary;
     [SerializeField] protected ProjectileScriptableObject staffSecondary;
+//------------------------------------------------
 
+//Las armas del hunter las hicimos al final, asi que no les hemos añadido Scriptable object, por ahora usaremos sus variables asi: 
     [SerializeField] private float revolverDamage = 60f; 
-    //El daño del revolver y de la escopeta son las ultimas añadidas asi que aun no le hemos puesto daño en sus scriptableObjects, asi que por ahora les usamos el daño asi
     [SerializeField] private float shotgunDamage = 40f;
-    [SerializeField] protected LayerMask layersDetect = new LayerMask();
+//-------------------------------------------------------------
+    [SerializeField] protected LayerMask layersDetect = new LayerMask();//Layers que va a detectar el enemigo
     
+
+//Variables publicas no serializadas
     [System.NonSerialized]public float health = 300; //Salud de la araña, la inicializo en un valor mayor a 0 solo para que no muera al inicio
 
-    [System.NonSerialized] public float damage = 1;
+    [System.NonSerialized] public float damage = 1; //Daño del enemigo
+    [HideInInspector] public bool moving; // Booleano para saber si se esta moviendo, mas que nada para el sonido
+//-------------------------------------------------------------------------------------------------------
 
-    private Vector3 initialPosition;
-    public event Action<Vector3> OnEnemyDeath;    
+    public event Action<Vector3> OnEnemyDeath; //Evento para que los enemigos reaccionen de distintas maneras cuando otro muere cerca de ellos, aun no lo implemente del todo   
     private float timerDead = 0; //Timer para saber cuanto dura la animacion de muerte
     protected float timerAttack = 0;//Timer para el vars.waitAttack
-    protected float timerMove = 0;
+    protected float timerMove = 0; //Timer para moverse
     
-    protected float timerDetect = 0;
+    protected float timerDetect = 0; //Timer para detectar al jugador
 
-    [SerializeField] float waitTimeDetect = 10f;
-    [SerializeField] float waitRotate = 1f;
+    [SerializeField] float waitTimeDetect = 10f; //Wait time para el timer detect
+    [SerializeField] float waitRotate = 1f; //wait time para saber cada cuanto rotar
 
-    [SerializeField] float waitMove = 1f;
+    [SerializeField] float waitMove = 1f; //wait para el timer move
 
     [SerializeField] private float staffPrimaryDamageMult; //Daño de la bala del disparo cargado
 
-    [SerializeField] protected bool playerDetected = false;
-    [SerializeField] protected bool isFollowing;//Variable para saber si se esta siguiendo al jugador
-    [SerializeField] float footstepInterval = 0.1f;
+    protected bool playerDetected = false; //boleano para cuando se detecte al jugador
+    protected bool isFollowing;//Variable para saber si se esta siguiendo al jugador
 
-    [SerializeField] PlayAudio playAudio;
+    [SerializeField] bool enemyWalks = true;
+    [SerializeField] float footstepInterval = 0.4f; //variable para el sonido de pasos
+
+    [SerializeField] PlayAudio playAudio; //scirpt del audio
     
     protected bool canAttack = false;//Variable para saber cuando se puede atacar
     protected bool randomMove = true;//Variable para saber si se mueve con wayPoints
 
-    protected bool isHurt = false; 
-    protected bool isDeath = false;
+    protected bool isHurt = false;  //variable para cuando se hiera al enemigo
+    protected bool isDeath = false; //variable para cuando se muera
 
-    [SerializeField] protected GameObject player;//El jugador
+    
+    private Vector3 lastPosition;
+
+    protected GameObject player;//El jugador
     protected GameObject hitBoxAttack; //Collider que simula el ataque
 
     protected Vector3 rayCastDirection; //Direccion del rayo
@@ -63,21 +75,19 @@ public class EnemyHandler : MonoBehaviour
     private GameObject modelContainter;
 
     //protected BillboardScript lookPlayer;
-    protected System.Random rnd = new System.Random();
+    protected System.Random rnd = new System.Random(); //Uso system.random por que al tener la biblioteca de System, no me dejaba usar Random.Range
 
     protected Rigidbody rigidbody;
 
     private GameObject particles;
-    private void Awake() { //Al instanciarse:
-        int i= 0;
-        randomMove = false; //Empieza moviendose hacia cualquier lado
-        playerDetected = false;
+    protected virtual void Awake() { //Al instanciarse:
+        randomMove = false; 
+        playerDetected = false; 
         isFollowing = false; //No va a empezar siguiendo al jugador
         canAttack = false; //No va a poder atacar
         isHurt = false;
-        health = vars.health;
-        damage = vars.damage;
-        initialPosition = transform.position;
+        health = vars.health; //Obtengo la salud
+        damage = vars.damage; // Obtengo el daño
     }
     // Start is called before the first frame update
     protected virtual void Start()
@@ -107,8 +117,8 @@ public class EnemyHandler : MonoBehaviour
             OnEnemyDeath += enemies[i].OnEnemyDeathReaction;
             i++;
         }
-        Debug.Log("PointsManager del UI se suscribio al evento de OnEnemyDeath");
-        Debug.Log("OnEnemyDeathCloseReaction se suscribio al evento de OnEnemyDeath");
+       // Debug.Log("PointsManager del UI se suscribio al evento de OnEnemyDeath");
+        //Debug.Log("OnEnemyDeathCloseReaction se suscribio al evento de OnEnemyDeath");
 
         hitBoxAttack.SetActive(false); //Desactivo la hitbox de ataque
 
@@ -122,13 +132,13 @@ public class EnemyHandler : MonoBehaviour
             Debug.LogError("El tiempo para poner el ataque no debe ser ni mayor ni igual al tiempo para quitarlo"); //Mostrar Error
         }
         if(DungeonManager.Instance.finished){
-            transform.parent = GameObject.Find("EnemiesContainer").transform;
-            Debug.Log("Bien instanciado");
+             transform.parent = GameObject.Find("EnemiesContainer").transform;
         }
         else{
             Debug.LogError("Mal instanciado");
         }
-        StartCoroutine(Footsteps());
+
+        if (enemyWalks) StartCoroutine(Footsteps());
 
         //randomMove = true;
     }
@@ -148,6 +158,8 @@ public class EnemyHandler : MonoBehaviour
         Death();//Funcion para animar la muerte, y eliminar el gameObject
         
         Attack(); //Funcion de ataque
+
+        IsMoving();
 
 
         if(isHurt){ //Si el enemigo no detecto al jugador y esta herido:
@@ -361,12 +373,12 @@ public class EnemyHandler : MonoBehaviour
                 isHurt = true;
                 break;
             case "ShotgunEnemyHit(Clone)":
-                health -= shotgunDamage;
+                health -= vars.shotgunDamage;
                 randomMove = false;
                 isHurt = true;
                 break;
             case "RevolverEnemyHit(Clone)":
-                health -= revolverDamage;
+                health -= vars.revolverDamage;
                 randomMove = false;
                 isHurt = true;
                 break;
@@ -438,13 +450,25 @@ public class EnemyHandler : MonoBehaviour
     public virtual void OnEnemyDeathReaction(Vector3 enemyDeathPosition){
         //Funcion vacia, que sera reescrita en los scripts hijos
     }
+    private void IsMoving()
+    {
+        if (lastPosition.x != gameObject.transform.position.x | lastPosition.z != gameObject.transform.position.z)
+        {
+            lastPosition = gameObject.transform.position;
+            moving = true;
+        }
+        else moving = false;
+    }
     private IEnumerator Footsteps()
     {
         while (true)
         {
-            playAudio.PlayAudioOneShot(rnd.Next(0, 3));
-            // Debug.Log("audio");
-            yield return new WaitForSeconds(footstepInterval);
+            if(moving)
+            {
+                playAudio.PlayAudioOneShot(rnd.Next(0, 3));
+                yield return new WaitForSeconds(footstepInterval);
+            }
+            yield return new WaitForEndOfFrame();
         }
     }
     protected virtual void StateMachine(){

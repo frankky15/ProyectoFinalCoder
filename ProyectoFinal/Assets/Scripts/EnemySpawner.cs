@@ -6,19 +6,24 @@ public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] GameObject[] enemies;
     [SerializeField] float[] probabilitySpawn;
+
     
     EnemiesLeftOnScene enemiesLeft;
     public bool instantiated;
 
+    float probability = 100;
     private void Start() {
-        if(GameObject.Find("EnemiesLeft") != null){
-            Debug.Log("Game Object encontrado");
+        if(probabilitySpawn.Length != enemies.Length){
+            Debug.LogWarning("La cantidad de probabilidad y de enemigos al instanciarse debe ser la misma");
+        }
+        probability = Random.Range(0,100);
+        Debug.Log("Dado: " + probability + "probabilidad" + probabilitySpawn[0]);
+        /*if(GameObject.Find("EnemiesLeft") != null){
             if(GameObject.Find("EnemiesLeft").GetComponent<EnemiesLeftOnScene>() != null){
-                Debug.Log("Componente encontrado");
                 enemiesLeft = GameObject.Find("EnemiesLeft").GetComponent<EnemiesLeftOnScene>();
             }
             
-        }
+        }*/
         
     }
 
@@ -28,16 +33,22 @@ public class EnemySpawner : MonoBehaviour
     public void Spawn(){
         if(DungeonManager.Instance.finished){
             int i = 0;
-            if(instantiated == false && i < enemies.Length)
+            
+            do
             {
-                float probability = Random.Range(1,100);
-                if(probability <= probabilitySpawn[i]){
+                //Debug.Log("Probabilidad de spawn" + probabilitySpawn);
+                if(probability < probabilitySpawn[i]){
+                    Debug.Log("i " + i);
                     Instantiate(enemies[i],transform);
                     //Debug.Log("true");
                     instantiated = true;
+                    Destroy(this);
                 }
-                i++;
-            }
+                else{
+                    i++;
+                    probability = Random.Range(0,100);
+                }
+            } while(instantiated == false && i < enemies.Length);
         }
     }
 }

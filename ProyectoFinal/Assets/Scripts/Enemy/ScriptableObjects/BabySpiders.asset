@@ -12,19 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d760eb16629f3744b9a707e5ef148b3, type: 3}
   m_Name: BabySpiders
   m_EditorClassIdentifier: 
-  points: 10
-  multiplierPoints: 1
-  health: 10
-  multiplierHealth: 1
-  damage: 10
-  multiplierDamage: 1
-  speed: 1
-  runSpeed: 2
+  health: 0.1
+  multiplierHealth: 2
+  maxHealth: 900
+  damage: 1
+  multiplierDamage: 2
+  maxDamage: 100
+  speed: 3
+  runSpeed: 10
   keepDistance: 1
   waitAttack: 1
   waitTimeDead: 2
-  timeToSetAttack: 0.3
-  timeToQuitAttack: 0.5
+  timeToSetAttack: 0.4
+  timeToQuitAttack: 0.45
   visionRange: 40
   multiplierVisionRange: 1
   hearRange: 5
@@ -32,3 +32,11 @@ MonoBehaviour:
   followRange: 100
   multiplierFollowRange: 1
   waitNewDirection: 2
+  revolverDamage: 60
+  shotgunDamage: 140
+  timeEffect: 0
+  timeEffectMultiplier: 0
+  maxEffectTime: 10
+  effectInstensity: 0
+  effectIntensityMultiplier: 0
+  maxEffectIntensity: 5

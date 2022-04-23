@@ -1440,11 +1440,23 @@ PrefabInstance:
       objectReference: {fileID: 423460434845721215, guid: 32252ece6c6cb4f4999fc5605b1385fa, type: 3}
     - target: {fileID: 2967281810770741370, guid: 737fd79cfe075b74d9b9de7cd7606559, type: 3}
       propertyPath: probabilitySpawn.Array.data[0]
-      value: 35
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 2967281810770741370, guid: 737fd79cfe075b74d9b9de7cd7606559, type: 3}
+      propertyPath: probabilitySpawn.Array.data[1]
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 2967281810770741370, guid: 737fd79cfe075b74d9b9de7cd7606559, type: 3}
+      propertyPath: probabilitySpawn.Array.data[2]
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 2967281810770741370, guid: 737fd79cfe075b74d9b9de7cd7606559, type: 3}
       propertyPath: probabilitySpawn.Array.data[3]
-      value: 20
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2967281810770741370, guid: 737fd79cfe075b74d9b9de7cd7606559, type: 3}
+      propertyPath: probabilitySpawn.Array.data[4]
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 5790515591280482306, guid: 737fd79cfe075b74d9b9de7cd7606559, type: 3}
       propertyPath: m_RootOrder
@@ -1456,7 +1468,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5790515591280482306, guid: 737fd79cfe075b74d9b9de7cd7606559, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5790515591280482306, guid: 737fd79cfe075b74d9b9de7cd7606559, type: 3}
       propertyPath: m_LocalPosition.z

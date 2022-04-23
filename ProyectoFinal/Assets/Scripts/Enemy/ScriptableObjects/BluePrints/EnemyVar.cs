@@ -5,12 +5,12 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "EnemyVar", menuName = "ScriptableObjects/EnemyVar")]
 public class EnemyVar : ScriptableObject
 {
-    public int points = 10;
-    [SerializeField] private int multiplierPoints = 1;
     public float health = 60;
     [SerializeField] float multiplierHealth = 1f;
+    [SerializeField] float maxHealth = 900f;
     public float damage = 50f; //Daño de la araña
     [SerializeField] float multiplierDamage =1f;
+    [SerializeField] float maxDamage = 100f;
     public float speed = 5f; //Variable de velocidad
     public float runSpeed = 7f; //Variable de velocidad al correr
     public float keepDistance = 2f; //Variable para no pegarse al jugador
@@ -22,19 +22,32 @@ public class EnemyVar : ScriptableObject
     public float visionRange = 50f;
     [SerializeField] float multiplierVisionRange = 1f;
     public float hearRange = 5f;
-    public float visionOnWallRange = 3f;//Variable para saber a que distancia de una pared cambia su direccion
+    public float visionOnWallRange = 0.5f;//Variable para saber a que distancia de una pared cambia su direccion
     public float followRange = 30f;//Rango hasta cuanto va a seguir al jugador
     [SerializeField] float multiplierFollowRange = 1f;
 
     public float waitNewDirection = 0.9f;
 
-    private int score = 0;
-    private void Start() {
-        score = PlayerPrefs.GetInt("score", 0);
-        points += score*multiplierPoints;
-        health += score*multiplierHealth;
-        damage += score*multiplierDamage;
+    //El daño del revolver y de la escopeta son las ultimas añadidas asi que aun no le hemos puesto daño en sus scriptableObjects, asi que por ahora les usamos el daño asi
+    public float revolverDamage = 60f;
+    public float shotgunDamage = 200f;
+
+    public float timeEffect = 0.0f;
+    [SerializeField] private float timeEffectMultiplier = 0.0f;
+    [SerializeField] float maxEffectTime = 10f;
+    public float effectInstensity = 0.0f;
+    [SerializeField] private float effectIntensityMultiplier = 0.0f;
+    [SerializeField] float maxEffectIntensity = 5f;
+
+    int score = 0;
+    protected virtual void Start() {
+        score = ScoreManager.Instance.score;
+        Debug.Log(score);
+        if(health < maxHealth) health += score*multiplierHealth; else health = maxHealth;
+        if(damage < maxDamage)    damage += score*multiplierDamage; else damage = maxDamage;
         followRange += score*multiplierFollowRange;
         visionRange += score*multiplierFollowRange;
+        if(effectInstensity < maxEffectIntensity) effectInstensity += score * effectIntensityMultiplier; else effectInstensity = maxEffectIntensity;
+        if(timeEffect < maxEffectTime) timeEffect += score * timeEffectMultiplier; else timeEffect = maxEffectTime;
     }
 }

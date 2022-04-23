@@ -46,14 +46,15 @@ public class SettingsManager : MonoBehaviour
     public void SetVolume(float volume)
     {
         // Debug.Log(volume);
-        audioMixer.SetFloat("volume", volume);
-        PlayerPrefs.SetFloat("volume", volume);
+        audioMixer.SetFloat("volume", Mathf.Log10(volume) *20);
+        PlayerPrefs.SetFloat("volume", Mathf.Log10(volume) *20);
     }
 
     public void SetSensitivity(float sensitivity)
     {
         // Debug.Log(sensitivity);
         PlayerPrefs.SetFloat("sensitivity", sensitivity);
+        // PlayerHandler.Instance.sensMultiplier = sensitivity;
         if (playerInScene) PlayerHandler.Instance.sensMultiplier = sensitivity;
     }
 
@@ -98,10 +99,10 @@ public class SettingsManager : MonoBehaviour
         else return 0;
     }
 
-    private void InitSettings()
+    public void InitSettings()
     { // Inicializacion de los sliders..
-        volumeSlider.minValue = -80f;
-        volumeSlider.maxValue = 0f;
+        volumeSlider.minValue = 0.0001f;
+        volumeSlider.maxValue = 1f;
 
         sensSlider.minValue = 1f;
         sensSlider.maxValue = 10f;
@@ -110,7 +111,7 @@ public class SettingsManager : MonoBehaviour
         displayMode.value = PlayerPrefs.GetInt("screenmode", 1);
         qualityMode.value = PlayerPrefs.GetInt("qualitymode", 1);
         musicToggle.isOn = IntToBool(PlayerPrefs.GetInt("music", 1));
-        volumeSlider.value = PlayerPrefs.GetFloat("volume", -20f);
+        volumeSlider.value = PlayerPrefs.GetFloat("volume", 0.8f);
         sensSlider.value = PlayerPrefs.GetFloat("sensitivity", 4f);
         renderDistanceSlider.value = PlayerPrefs.GetFloat("rendist", 20f);
 

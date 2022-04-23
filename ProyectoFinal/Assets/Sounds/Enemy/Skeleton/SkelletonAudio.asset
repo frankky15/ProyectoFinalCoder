@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0128c312ff7db774b8fd4b2e8d01866d, type: 3}
   m_Name: SkelletonAudio
   m_EditorClassIdentifier: 
-  audio0: {fileID: 8300000, guid: 4b4327d6ad114074b952371a89399800, type: 3}
-  audioVol0: 0.701
-  audio1: {fileID: 8300000, guid: b22ec6d56d19f484998cd486cc665759, type: 3}
+  audio0: {fileID: 8300000, guid: 298f6a38542b1a842b045d480910d648, type: 3}
+  audioVol0: 1
+  audio1: {fileID: 8300000, guid: 9a14f39ce9b67cc4f82ab6f83f433169, type: 3}
   audioVol1: 1
-  audio2: {fileID: 8300000, guid: b8b1b1e546e7330489166fbb02d5d203, type: 3}
+  audio2: {fileID: 8300000, guid: 7b989f724d26f5b47ada1f2971902b8a, type: 3}
   audioVol2: 1
   audio3: {fileID: 8300000, guid: e037fea95c8589c459d0dd53bf973a2b, type: 3}
   audioVol3: 1
-  audio4: {fileID: 0}
+  audio4: {fileID: 8300000, guid: bb4060a75e2172c40b053909cc657556, type: 3}
   audioVol4: 1
   audio5: {fileID: 0}
   audioVol5: 1

@@ -14,6 +14,7 @@ public class MainMenuController : MonoBehaviour
     }
     public void QuitGame()
     {
+        PlayerPrefs.Save();
         Application.Quit();
     }
 }

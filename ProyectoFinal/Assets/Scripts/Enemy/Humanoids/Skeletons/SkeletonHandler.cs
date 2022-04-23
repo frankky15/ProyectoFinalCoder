@@ -5,6 +5,7 @@ using UnityEngine;
 public class SkeletonHandler : MeleHumanoidHandler
 {
     protected int attack = 0;
+    int lastAttack = 2;
     [SerializeField] GameObject[] bodyPartsThatCanBeGetDown;
     [SerializeField] float initialHealthBodyParts = 30;
 
@@ -16,18 +17,21 @@ public class SkeletonHandler : MeleHumanoidHandler
     float timerToGetDown = 0;
     float timerToDissapeir = 0;
 
+    bool alreadyAttack = false;
+
     List<bool> partsOnTheFloor;
     Dictionary<GameObject,float> bodyParts = new Dictionary<GameObject, float>();
-    /*protected override void Start(){
-        int i = 0;
+    protected override void Start(){
         base.Start();
+        attack = 0;
+        /*int i = 0;
         foreach (var item in bodyPartsThatCanBeGetDown)
         {
             bodyParts.Add(bodyPartsThatCanBeGetDown[0],initialHealthBodyParts);
             partsOnTheFloor.Add(false);
             i++;
-        }
-    }*/
+        }*/
+    }
     protected override void Update()
     {
         base.Update();
@@ -92,30 +96,30 @@ public class SkeletonHandler : MeleHumanoidHandler
             }
         }
         if(canAttack){
-            if(timerAttack == 0){
-                attack = Random.Range(0,2);
-                switch(attack){
-                    case 0:
-                        animator.SetTrigger("Attack");
-                        break;
-                    case 1:
-                        animator.SetTrigger("Attack1");
-                        break;
-                    case 2:
-                    animator.SetTrigger("Attack2");
-                        break;
-                    default:
-                        animator.SetTrigger("Attack");
-                        Debug.LogWarning("variable attack no esta dentro del rango especificado");
-                        break;
-                }
+            Debug.Log("attack" +attack);
+            if(attack <= 0) animator.SetTrigger("Attack");
+            else if(attack >= 1) animator.SetTrigger("Attack1");
+            /*else if(attack >= 2){
+                animator.SetTrigger("Attack2");
+            }*/
+            else{
+                attack = 0;
             }
         }
+        if(attack > 2 && timerAttack < vars.timeToSetAttack){
+            attack = 0;
+        }
+            
         if(isHurt){
             animator.SetTrigger("Hurt");
+            isHurt = false;
         }
         if(isDeath){
             animator.SetTrigger("Death");
         }
+    }
+    private void SetAttackWithAnimation(){
+        attack++;
+        Debug.Log(attack);
     }
 }

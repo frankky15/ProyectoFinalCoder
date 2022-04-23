@@ -7139,11 +7139,10 @@ MonoBehaviour:
   waitRotate: 1
   waitMove: 0
   staffPrimaryDamageMult: 0
-  playerDetected: 0
-  isFollowing: 0
-  footstepInterval: 0.1
+  enemyWalks: 1
+  footstepInterval: 0.4
   playAudio: {fileID: 8140506887739722364}
-  player: {fileID: 0}
+  moving: 0
   bodyPartsThatCanBeGetDown: []
   initialHealthBodyParts: 30
   waitToGetDown: 0.9
@@ -7175,8 +7174,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.42215532, y: 2.4473596, z: 0.3067126}
-  m_Center: {x: -0.029268809, y: 0.72368, z: -0.015816465}
+  m_Size: {x: 0.42215532, y: 1.931579, z: 0.3067126}
+  m_Center: {x: -0.029268801, y: 0.9815703, z: -0.015816465}
 --- !u!82 &2243492507352919671
 AudioSource:
   m_ObjectHideFlags: 0
@@ -7186,11 +7185,11 @@ AudioSource:
   m_GameObject: {fileID: 7481166389706116466}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: c4b530bdf4fb71a499d25fd5f0f939bd, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
-  m_Pitch: 1
+  m_Pitch: 1.49
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -7198,7 +7197,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 100
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -7233,7 +7232,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -7919,8 +7918,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.7434404, y: 0.56794775, z: 1.0384815}
-  m_Center: {x: 0.1291998, y: -0.18572417, z: 1.0842212}
+  m_Size: {x: 0.6377439, y: 0.19222043, z: 0.45054933}
+  m_Center: {x: 0.20343533, y: 0.0021398184, z: 1.1838015}
 --- !u!1 &7481268170759746450
 GameObject:
   m_ObjectHideFlags: 0
@@ -8193,8 +8192,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.57464486, y: 0.86286294, z: 0.4579918}
-  m_Center: {x: -0.5301254, y: -2.166273, z: -1.4034145}
+  m_Size: {x: 0.4272944, y: 0.22867782, z: 0.08011135}
+  m_Center: {x: -0.45645002, y: -1.9021325, z: -1.441883}
 --- !u!1 &7481337701695600748
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: PlayerAudioContainer
   m_EditorClassIdentifier: 
   audio0: {fileID: 8300000, guid: 298f6a38542b1a842b045d480910d648, type: 3}
-  audioVol0: 1
+  audioVol0: 0.6
   audio1: {fileID: 8300000, guid: 9a14f39ce9b67cc4f82ab6f83f433169, type: 3}
-  audioVol1: 1
+  audioVol1: 0.3
   audio2: {fileID: 8300000, guid: 7b989f724d26f5b47ada1f2971902b8a, type: 3}
-  audioVol2: 1
+  audioVol2: 0.6
   audio3: {fileID: 0}
   audioVol3: 1
   audio4: {fileID: 0}

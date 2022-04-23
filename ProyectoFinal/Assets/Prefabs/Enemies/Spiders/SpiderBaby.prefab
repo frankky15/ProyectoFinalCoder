@@ -31,8 +31,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children:
-  - {fileID: 8020970379442984277}
   - {fileID: 5958044883581231463}
+  - {fileID: 8020970379442984277}
   - {fileID: 2070744036053097729}
   - {fileID: 2716794522282050165}
   m_Father: {fileID: 0}
@@ -78,10 +78,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 1.364348
-  m_Height: 2.728696
+  m_Radius: 1.6548725
+  m_Height: 3.3097453
   m_Direction: 1
-  m_Center: {x: -0.038092136, y: 1.1762773, z: -0.21073416}
+  m_Center: {x: -0.038092136, y: 1.1762774, z: 0.079790354}
 --- !u!114 &7805397813755259047
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -108,11 +108,10 @@ MonoBehaviour:
   waitRotate: 1
   waitMove: 0
   staffPrimaryDamageMult: 0
-  playerDetected: 0
-  isFollowing: 0
-  footstepInterval: 0.1
+  enemyWalks: 1
+  footstepInterval: 0.15
   playAudio: {fileID: 1062239220005040051}
-  player: {fileID: 0}
+  moving: 0
   timeOnFire: 1
   damagePerFire: 2
   pointsForScare: 2000
@@ -5742,7 +5741,7 @@ AudioSource:
   m_GameObject: {fileID: 5022851547495473422}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: c4b530bdf4fb71a499d25fd5f0f939bd, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -5754,7 +5753,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 1.01
+  MaxDistance: 100
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -5870,7 +5869,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4129895862203104438}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6672671982475512278
 GameObject:
@@ -6207,7 +6206,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4129895862203104438}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &4310503158563609150
 SphereCollider:

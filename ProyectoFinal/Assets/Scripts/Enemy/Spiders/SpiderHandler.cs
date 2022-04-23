@@ -12,9 +12,6 @@ public class SpiderHandler : MeleEnemyHandler
     private float timerOnFire = 0;
     private bool isOnFire = false;
 
-    private bool moving;
-
-    private Vector3 lastPosition;
     private AnimationsController animatorController; //Script que activa las animaciones
     //public float damage { get; private set;}
 
@@ -37,12 +34,6 @@ public class SpiderHandler : MeleEnemyHandler
             isOnFire = false;
             timerOnFire = 0;
         }
-                if (lastPosition.x != gameObject.transform.position.x | lastPosition.z != gameObject.transform.position.z)
-        {
-            lastPosition = gameObject.transform.position;
-            moving = true;
-        }
-        else moving = false;
     }
 
    /*protected override void Follow(){
@@ -87,12 +78,15 @@ public class SpiderHandler : MeleEnemyHandler
             isHurt = false;
         }
     }
-    public virtual void OnFire(){
-        isOnFire = true;
-    }
+    
     protected override void OnTriggerEnter(Collider other)
     {
         base.OnTriggerEnter(other);
+        if(other.GetComponent<Collider>() != null){
+            if(other.transform.name == "PyroHandSecondaryEnemy(Clone)"){
+                isOnFire = true;
+            }
+        }
     }
 
     

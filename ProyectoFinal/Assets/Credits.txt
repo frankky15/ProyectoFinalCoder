@@ -1,0 +1,35 @@
+Los assets utilizados estan en third party...
+
+
+Sonido:
+    Sonido de las armas. "Castro Franco"
+    Sonido de los enemigos. "Castro Franco"
+    Sonido del jugador. "Castro Franco"
+    Sonido Ambiental. "Castro Franco"
+    Musica de fondo. "Castro Franco"
+
+Animaciones:
+    Animaciones de los enemigos. "Third Party"
+    Animaciones de las armas. "Castro Franco"
+
+Scrips:
+    Scripts de enemigos. "Martin Tannenbaum"
+    Detecciones de daño. "Martin Tannenbaum"
+    Scripts del jugador. "Castro Franco"
+    Scripts de las armas. "Castro Franco"
+    Scripts de dungeon. "Castro Franco", Creditos del script base del generador a "Art Notes"..
+    Scripts de menues y settings. "Castro Franco"
+    Scripts genericos. (carga de escenas, interacciones, audioplayers y managers, seleccion de clases, hud, score, GameManager, etc.) "Castro Franco"
+
+Escenas:
+    Diseño de la dungeon "Castro Franco", "Third Party (assets)"
+    Enemigos en la dungeon "Martin Tannenbaum"
+    Laboratorio (la escena del espacio) "Castro Franco"
+    MainMenu "Castro Franco"
+
+Menues, UI, HUd y diseño grafico en general: "Castro Franco"
+
+Playtesters:
+    "Martin Tannenbaum"
+    "Castro Franco"
+    "y ahora el profe ;)"

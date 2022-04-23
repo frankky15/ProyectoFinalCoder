@@ -12,23 +12,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d760eb16629f3744b9a707e5ef148b3, type: 3}
   m_Name: WhiteSpider
   m_EditorClassIdentifier: 
-  points: 10
-  multiplierPoints: 1
   health: 60
   multiplierHealth: 1
-  damage: 100
-  multiplierDamage: 0.5
-  speed: 2
+  maxHealth: 900
+  damage: 10
+  multiplierDamage: 2
+  maxDamage: 100
+  speed: 5
   runSpeed: 7
-  keepDistance: 2
+  keepDistance: 1.8
   waitAttack: 1
   waitTimeDead: 2
-  timeToSetAttack: 0.3
-  timeToQuitAttack: 0.5
-  visionRange: 80
+  timeToSetAttack: 0.1
+  timeToQuitAttack: 0.3
+  visionRange: 50
   multiplierVisionRange: 1
   hearRange: 5
-  visionOnWallRange: 3
-  followRange: 100
+  visionOnWallRange: 0.5
+  followRange: 30
   multiplierFollowRange: 1
-  waitNewDirection: 2
+  waitNewDirection: 0.9
+  revolverDamage: 60
+  shotgunDamage: 140
+  timeEffect: 6
+  timeEffectMultiplier: 4
+  maxEffectTime: 10
+  effectInstensity: 3
+  effectIntensityMultiplier: 0.3
+  maxEffectIntensity: 5

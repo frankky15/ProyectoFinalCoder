@@ -13,12 +13,22 @@ MonoBehaviour:
   m_Name: BackgroundSoundContainer
   m_EditorClassIdentifier: 
   audio0: {fileID: 8300000, guid: eaf66a9afbe04cc47959cadaa752d3a0, type: 3}
+  audioVol0: 0.3
   audio1: {fileID: 0}
+  audioVol1: 1
   audio2: {fileID: 0}
+  audioVol2: 1
   audio3: {fileID: 0}
+  audioVol3: 1
   audio4: {fileID: 0}
+  audioVol4: 1
   audio5: {fileID: 0}
+  audioVol5: 1
   audio6: {fileID: 0}
+  audioVol6: 1
   audio7: {fileID: 0}
+  audioVol7: 1
   audio8: {fileID: 0}
+  audioVol8: 1
   audio9: {fileID: 0}
+  audioVol9: 1
